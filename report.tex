@@ -1,0 +1,223 @@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Sets the document class for the document
+% Openany is added to remove the book style of starting every new chapter on an odd page (not needed for reports)
+\documentclass[12pt,english,openany,a4paper]{book}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Loading packages that alter the style
+\usepackage[]{graphicx}
+\usepackage{subcaption}
+\usepackage[]{color}
+\usepackage{alltt}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{makecell}
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+% \usepackage{amssymb}
+% \usepackage{url}
+\usepackage{ulem}
+\usepackage[figuresleft]{rotating}
+% \usepackage{xcolor}
+% \usepackage{libertine}
+% \usepackage{pdfpages}
+% \usepackage[toc,page]{appendix}
+% \usepackage{cite}
+
+% \setlength{\parskip}{\smallskipamount}
+\parskip 1.8ex % paragraph spacing
+% \setlength{\parindent}{10ex}
+
+% \renewcommand{\baselinestretch}{1.20} % line spacing
+\usepackage{multirow}
+\usepackage{makecell}
+% \usepackage{siunitx}
+\usepackage{mathptmx}
+
+
+% Set page margins
+\usepackage[top=100pt,bottom=100pt,left=68pt,right=66pt]{geometry}
+
+% Package used for placeholder text
+% \usepackage{lipsum}
+
+% Use to cross cite in document
+% \usepackage{notoccite}
+
+% Prevents LaTeX from filling out a page to the bottom
+\raggedbottom
+
+% Adding both languages
+\usepackage[english]{babel}
+
+% All page numbers positioned at the bottom of the page
+\usepackage{fancyhdr}
+\fancyhf{} % clear all header and footers
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt} % remove the header rule
+\pagestyle{fancy}
+
+% Changes the style of chapter headings
+\usepackage{titlesec}
+\titleformat{\chapter}
+   {\normalfont\LARGE\bfseries}{\thechapter.}{1em}{}
+% Change distance between chapter header and text
+\titlespacing{\chapter}{0pt}{50pt}{2\baselineskip}
+
+% Adds table captions above the table per default
+% \usepackage{float}
+% \floatstyle{plaintop}
+% \restylefloat{table}
+
+% Adds space between caption and table
+\usepackage[tableposition=top]{caption}
+
+% Modern implementation of the bookmarks managing is used without .out file. The bookmarks are updated earlier, thus in most cases only one LaTeX run is needed.
+\usepackage{bookmark}
+
+% Adds hyperlinks to references and ToC
+\usepackage{hyperref}
+\usepackage{cleveref}
+\hypersetup{hidelinks,linkcolor = black} % Changes the link color to black and hides the hideous red border that usually is created
+% \hypersetup{linkcolor = black}
+
+% If multiple images are to be added, a folder (path) with all the images can be added here 
+\graphicspath{ {Figures/} }
+
+% Separates the first part of the report/thesis in Roman numerals
+\frontmatter
+\usepackage[sort&compress,numbers,comma,square]{natbib} %for references
+
+\setlength{\bibsep}{1.8ex plus 0.3ex}
+\renewcommand{\bibname}{References}
+%\renewcommand{\bibfont}{\normalfont\scriptsize}
+\makeatletter
+\renewcommand\@biblabel[1]{[#1]}
+\makeatother
+\newcommand\blfootnote[1]{%
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}%
+  \endgroup
+}
+\linespread{1}
+
+
+\titleformat{\chapter}{\normalfont\LARGE\bfseries}{\thechapter}{1em}{}
+\titlespacing{\chapter}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+
+\makeatletter
+\renewcommand*\l@figure{\@dottedtocline{1}{0em}{2.3em}}% Default: 1.5em/2.3em
+\let\l@table\l@figure
+\makeatother
+
+\renewcommand{\bibname}{References}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Starts the document
+\begin{document}
+
+%%% Selects the language to be used for the first couple of pages
+\selectlanguage{english}
+
+%%%%% Adds the title page
+\include{titlepage}
+
+
+
+\pagenumbering{roman}
+
+% \clearpage
+% \thispagestyle{empty}
+% \phantom{a}
+% \vfill
+% \begin{center}{\large \textit{This page has been intentionally left blank}}\end{center}
+% \vfill
+
+% \newpage
+% \include{abstract}
+
+% \clearpage
+% \thispagestyle{empty}
+% \phantom{a}
+% \vfill
+% \begin{center}{\large \textit{This page has been intentionally left blank}}\end{center}
+% \vfill
+
+% \include{declaration}
+
+% \clearpage
+% \thispagestyle{empty}
+% \phantom{a}
+% \vfill
+% \begin{center}{\large \textit{This page has been intentionally left blank}}\end{center}
+% \vfill
+
+% \include{certificate}
+
+% \clearpage
+% \thispagestyle{empty}
+% \phantom{a}
+% \vfill
+% \begin{center}{\large \textit{This page has been intentionally left blank}}\end{center}
+% \vfill
+% \include{acknowledgement}
+
+\tableofcontents
+\newpage
+
+\listoffigures
+\addcontentsline{toc}{chapter}{\numberline{}List of Figures}%
+
+\newpage
+\listoftables
+\addcontentsline{toc}{chapter}{\numberline{}List of Tables}%
+
+\clearpage
+%\includepdf[pages={10}, pagecommand={}]{external.pdf}
+%\include{nomenclature}
+
+\pagenumbering{arabic}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Text body starts here!
+\mainmatter
+
+
+\include{intro}
+\include{problemBackground}
+% TODO: Should keep problem up or down?
+\include{previousWork}
+% \include{literature}
+\include{proposedModel}
+
+\include{handleTraining}
+\include{resultsConculusion}
+
+
+\normalem
+\bibliographystyle{unsrtnat} 
+%\bibliography{longnamesfirst,semicolon}
+\bibliography{bibliography}
+\addcontentsline{toc}{chapter}{\numberline{}References}%
+
+% % Adding a bibliography if citations are used in the report
+% \bibliographystyle{plain}
+% \bibliography{bibliography.bib}
+% % Adds reference to the Bibliography in the ToC
+% \addcontentsline{toc}{chapter}{\bibname}
+% % \printbibliography
+
+% [1]: Arin Basu. (April 16 2017). How to add footnotes https://medium.com/@arinbasu/you-can-use-footnotes-thus-babus%C2%B9-6c485c4eff1e
+
+\pagebreak
+
+% \chapter*{Appendix A: Resources}
+% [\textit{Report the config files of the software used (i.e. SU2 \cite{economon2015su2} and the mesher). Also attach to this report an archive with the mesh files, solutions and the reference solution data (e.g. data points of a Cp plot ...)}]
+% \section*{Mesh configuration files}
+% \section*{SU2 configuration files}
+% \section{Reference solution data}
+
+
+\end{document}
