@@ -1,7 +1,7 @@
 \chapter{Problem definition and background}\label{chapt:problem}
-Road digitalization is an expensive operation. Research is being done to identify roads automatically using Artificial Intelligence with the different types of images. High-resolution satellite images are expensive to get, and covering an entire state or country is a nightmare. On the other hand, mid-resolution satellite images can be obtained for free, but the identification of roads on mid-resolution(>5~m) satellite data is difficult and often has low accuracy. This work tries to detect the smaller roads(with 1 or 2 lanes), which are often missed out. \par
+Road digitalization is an expensive operation. Research is being done to identify roads automatically using Artificial Intelligence with the different types of images. High-resolution satellite images are expensive to get, and covering an entire state or country is a nightmare. On the other hand, mid-resolution satellite images can be obtained for free, but the identification of roads on mid-resolution(>5~m) satellite data is difficult and often has low accuracy. This work tries to detect the smaller roads(with 1 or 2 lanes), which are often missed out.
 
-We will be using RGB images from satellite sentinel-2A. Detailed parameters of the satellite are given in Table~\ref{tab:sentinel-resolution}. Band 2(Blue), 3(Green), and 4(Red) are stacked together to get a 3-channel RGB image. As seen in the specifications, the spacial resolution of the final image is 10m. The task is to increase the accuracy of the existing road-detection algorithm. \par
+We will be using RGB images from satellite sentinel-2A. Detailed parameters of the satellite are given in Table~\ref{tab:sentinel-resolution}. Band 2(Blue), 3(Green), and 4(Red) are stacked together to get a 3-channel RGB image. As seen in the specifications, the spacial resolution of the final image is 10m. The task is to increase the accuracy of the existing road-detection algorithm.
 
 \begin{table}[h!]
   \centering
@@ -22,7 +22,7 @@ We will be using RGB images from satellite sentinel-2A. Detailed parameters of t
     60&1&442.7 \\
     60&9&945.1 \\
     60&10&1373.5 \\
-    \hline\\
+    \hline
   \end{tabular}
   \caption{Wavelengths and Bandwidths of the three Spatial Resolutions of the MSI instruments \cite{sentinelSpecifications}}
   \label{tab:sentinel-resolution}
@@ -31,10 +31,9 @@ We will be using RGB images from satellite sentinel-2A. Detailed parameters of t
 By combining the three bands from the raw satellite image, the resulting image size is of the order of 400~MB for one mid-sized city. At first, this may not seem significant in comparison with some of the media files. However, handling files of this size in DCNN is a severe issue. Let us see the specifications needed by a computer to handle this image in 1 go:
 % TODO: Calculations showing 400MB in DCNN
 
-\par
-This might be possible for massive supercomputers, but a general workstation has RAM anywhere from 128 to 256 GB RAM, while personal computers range from 8 GB to 32 GBs RAM. Thus, this image must be divided into several parts so that our algorithms work on a readily available device. \par
+This might be possible for massive supercomputers, but a general workstation has RAM anywhere from 128 to 256 GB RAM, while personal computers range from 8 GB to 32 GBs RAM. Thus, this image must be divided into several parts so that our algorithms work on a readily available device.
 
-Our input image does not have a sufficiently high resolution to identify small roads. To deal with this problem of pixelization, we will be using two types of models. This setup is shown in Figure~\ref{fig:model_complete_without_labels}. Unless specifically mentioned, a model means a combined setup using super-resolution and road-detection models. Data from the input layer goes to the super-resolution model, which is consequently passed to the road-detection model. The final output consists of the predicted road network in the image. \par
+Our input image does not have a sufficiently high resolution to identify small roads. To deal with this problem of pixelization, we will be using two types of models. This setup is shown in Figure~\ref{fig:model_complete_without_labels}. Unless specifically mentioned, a model means a combined setup using super-resolution and road-detection models. Data from the input layer goes to the super-resolution model, which is consequently passed to the road-detection model. The final output consists of the predicted road network in the image.
 
 \begin{figure}
   \centering

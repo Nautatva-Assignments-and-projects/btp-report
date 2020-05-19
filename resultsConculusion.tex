@@ -8,28 +8,49 @@ The model predicted most of the roads, which were predicted by the model without
 
 \begin{figure}[h!]
   \centering
-  \begin{subfigure}{0.71\textwidth}
+  \begin{subfigure}{0.55\textwidth}
     \includegraphics[width=\textwidth]{run_merge_roads}
     \caption{}
   \end{subfigure}~
-  \begin{subfigure}{0.29\textwidth}
+  \begin{subfigure}{0.21\textwidth}
+    \includegraphics[width=\textwidth]{run_road_linknet}
+    \caption{}
+  \end{subfigure}~
+  \begin{subfigure}{0.21\textwidth}
     \includegraphics[width=\textwidth]{sat_image_run}
     \caption{}
   \end{subfigure}
-  \caption[Finding likeliness of roads by combining results from different models]{Merging roads as obtained by prediction from model.}
+  \caption[Predictions]{(a) Predictions using our model. (b) Predictions just using the road-detection model. (c) Image used to find predictions. Comparing the original road-detection model with the improved model.}
   \label{fig:run_merge_road_maps}
 \end{figure}
-
 
 
 \section{Cons}
 One of the most noticeable drawbacks of using this model is the amount of time required to get the predictions. 
 
-Another disadvantage is too much affected due to inaccuracies in the training dataset. If the road gets too thick, like, say, we took an image with a little higher resolution, and run the model; we see that our model has several discontinuities in between. This is mainly because of the noise which has effected the weights. This error can be reduced by training the model with more precise data. Another way to correct this error is to run the algorithm without super-resolution. This means we need to train the model again, this time without super-resolution.
+Another disadvantage is too much affected due to inaccuracies in the training dataset. If the road gets too thick, like, say, we took an image with a little higher resolution, and run the model; we see that our model has several discontinuities in between[Figure~\ref{fig:cons_coverleaf}]. 
+This is mainly because of the noise which has effected the weights. This error can be reduced by training the model with more precise data. Another way to correct this error is to run the algorithm without super-resolution. This means we need to train the model again, this time without super-resolution.
 
-% TODO: Add the image of without SR, use it as a con on the thick road.
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{cons_coverleaf}
+    \caption{}
+  \end{subfigure}~
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{cons_road_coverleaf}
+    \caption{}
+  \end{subfigure}~
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{cons_road_coverleaf_sr}
+    \caption{}
+  \end{subfigure}
+  \caption[Problem in predictions large roads]{(a) The image to apply the model on. (b) Road detection without applying super-resolution. (c) Road detection by out model. When a wide road is to be predicted, the noise takes over and our predictions go horribly wrong.}
+  \label{fig:cons_coverleaf}
+\end{figure}
 
-Now that we have two predictions, one with super-resolution and without it, we merge them. First, we need to make them of the same resolutions. We do this by finding out the difference factor. Let us say the difference factor is x on each side; we split the lower resolution image pixels into x different pixels on both sides. Then we average the resultant images of the same resolution. For reference: look at Figure~\ref{fig:roads_in_confidence}
+
+Now that we have two predictions, one with super-resolution and without it, we merge them. First, we need to make them of the same resolutions. We do this by finding out the difference factor. Let us say the difference factor is $X$ on each side; we split the lower resolution image pixels into $X$ different pixels on both sides. Then we average the resultant images of the same resolution. For reference: look at Figure~\ref{fig:roads_in_confidence}
 
 \begin{figure}[h!]
   \begin{subfigure}[b]{0.25\textwidth}
@@ -52,9 +73,6 @@ Now that we have two predictions, one with super-resolution and without it, we m
   \label{fig:roads_in_confidence}
 \end{figure}
 
-
-
-
 \begin{sidewaysfigure}
   \centering
   \includegraphics[width=\textheight]{the_complete_picture}
@@ -62,9 +80,7 @@ Now that we have two predictions, one with super-resolution and without it, we m
   \label{fig:the_complete_picture}
 \end{sidewaysfigure}
 
-% \subsection{Test 2} ... as needed
-
-\chapter{Conclusions}
-\chapter{Scope of Improvements}
-https://towardsdatascience.com/road-segmentation-727fb41c51af
+% \chapter{Conclusions}
+% \chapter{Scope of Improvements}
+% https://towardsdatascience.com/road-segmentation-727fb41c51af
 \pagebreak

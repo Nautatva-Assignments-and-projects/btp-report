@@ -14,8 +14,10 @@
 \setcounter{secnumdepth}{3}
 \setcounter{tocdepth}{3}
 
+\usepackage[shortlabels]{enumitem}
 % \usepackage{amssymb}
-% \usepackage{url}
+\usepackage{url}
+\def\UrlBreaks{\do\/\do-}
 \usepackage{ulem}
 \usepackage[figuresleft]{rotating}
 % \usepackage{xcolor}
@@ -31,7 +33,13 @@
 % \renewcommand{\baselinestretch}{1.20} % line spacing
 \usepackage{multirow}
 \usepackage{makecell}
-% \usepackage{siunitx}
+\usepackage{siunitx}
+\sisetup{
+   detect-mode,
+   detect-family,
+   detect-inline-family=math,
+}
+
 \usepackage{mathptmx}
 
 
@@ -164,6 +172,7 @@
 % \include{acknowledgement}
 
 \tableofcontents
+% TODO: Refernces show end page instead of the first
 \newpage
 
 \listoffigures
@@ -184,17 +193,17 @@
 %%%%% Text body starts here!
 \mainmatter
 
-
 \include{intro}
 \include{problemBackground}
-% TODO: Should keep problem up or down?
 \include{previousWork}
-% \include{literature}
+\include{literature}
 \include{proposedModel}
 \include{handleTraining}
 \include{resultsConculusion}
-
-
+%\begin{appendices}
+% TODO: Appendix make the tex file and go about it as usual.
+%\include{nameofappendix}
+%\end{appendices}
 \normalem
 \bibliographystyle{unsrtnat} 
 %\bibliography{longnamesfirst,semicolon}
