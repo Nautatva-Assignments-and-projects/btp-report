@@ -1,15 +1,15 @@
 \chapter{Literature review}\label{chapt:lit}
 \section{Convolutional Neural Networks(CNN)}
-[\textit{A CNN is a type of Artificial neural network(ANN) in which, instead of a 1-D set of neurons constituting a layer in multilayer perceptron(MLP), a convolutional block is used. }]
+[\textit{A CNN is a type of Artificial neural network(ANN) where convolutional blocks are used instead of basic 1-D multilayer perceptrons}]
 
-For understanding CNN, we need to understand what an Artificial neural network(ANN) is. ANN is a system of interconnected neurons. ANNs are generally used to model complicated functions for various tasks, such as classification and regression. The most basic ANN model is multilayer perceptron. Any model is made up of atleast three layers: Input layer, one or more hidden layers, and an output layer. \ref{subsection:types_of_layers} shows different types of layers which can be used for a convolutional neural network. Several nonlinear activation functions such as rectified linear unit (ReLU)or sigmoid, or even custom functions can be applied at any point on the layers to produce activation maps. These activation maps are the points which finally help us in classification or segmentation.
+For understanding CNN, we need to see what an artificial neural network(ANN) is. ANN is a system of interconnected neurons used to model complex functions for classification and regression. Any model is made up of at least three layers: An input layer, one or more hidden layers, and an output layer. The most basic ANN model consists of multilayer perceptrons. \ref{subsection:types_of_layers} shows different types of layers that can be used for a convolutional neural network. Several nonlinear activation functions such as rectified linear unit (ReLU)or sigmoid, or even custom functions can be applied at any point on the layers to produce activation maps. These activation maps finally help us in classification or segmentation.
 
 \subsection{Types of layers}
 \label{subsection:types_of_layers}
 The general structure of any convolutional neural network can be categorized as follows:
 \begin{enumerate}[(a)]
     \item \textbf{Input layer}:
-        Input layer is the input of any neural network. Input of computer vision problems is usually an image which is basically matrix of numbers stacked multiple times(channels). An RGB image has 3 channels[Figure~\ref{fig:RGB_image}]. The height and width of the input layer correspond to the height and width of the matrix(resolution of the image). The depth of the input layer is the number of channels of input image.
+        The input layer is the input of any neural network. The input of computer vision problems is usually an image that is basically a matrix of numbers stacked multiple times(channels). An RGB image has 3 channels[Figure~\ref{fig:RGB_image}].
         \begin{figure}[h!]
             \centering
             \includegraphics[width=0.8\textwidth]{rgb_image_as_array}
@@ -18,9 +18,9 @@ The general structure of any convolutional neural network can be categorized as 
         \end{figure}
         
     \item \textbf{Convolution layer}:
-        As the name suggests, this is the most important layer of convolutional neural networks. A convolutional layer contains a set of filters(or kernel or node) whose parameters need to be learned. The height and width of the filter is pre-defined when defining the layer and are smaller than those of the input volume. for most images, the dimension of the filter is taken $3\times3$ or $5\times5$, but if the given image is large, filters upto size $11\times11$ can also be used. One catch is: a filter is not actually 2 dimensional. It takes in the dimension of the input it is provided with.
+        As the name suggests, this is the most important layer of convolutional neural networks. A convolutional layer contains a set of filters(or kernel or node) whose parameters need to be learned. The height and width of the filter are predefined when defining the layer and are smaller than those of the input volume. For most images, the dimension of the filter is taken $3\times3$ or $5\times5$, but if the given image is large, filters up to size $11\times11$ can also be used. One catch is: a filter is not two dimensional. It takes in the dimension of the input it is provided with.
 
-        Applying a filter to an image means taking inner product of the image and the filter within overapping area which keeps on moving. Suppose dimension of an image is $W\times W$ and dimension of the filter is $k\times k$, the dimension of the output image will be $(W-k+1)\times (W-k+1)$. Once, a filter has been applied, it passes through an activation function and the resulting image is called the output of that filter.
+        Applying a filter to an image means taking the inner product of the image and the filter within the overlapping area, which keeps on moving. Suppose the dimension of an image is $W\times W$ and dimension of the filter is $k\times k$, the dimension of the output image will be $(W-k+1)\times (W-k+1)$. Once a filter has been applied, it passes through an activation function, and the resulting image is called the output of that filter.
     
         The formula for convolutional neural network is: \begin{equation} a_{i,j} = f(\Sigma_{m=0}^2\Sigma_{n=0}^2 W_{m,n}X_{m+i,n+j}) \end{equation} where $\text{X}_{i, j}$ represents the pixel value of line $i$ in column $j$ of the image and $W_{m, n}$ represents the weight of column $n$in row $m$. Similarly, $a_{i,j}$ represents the value of column $j$ of the $i$ row of the feature map; the activation function is represented by $f$. [Example: Figure~\ref{fig:convolution_filter_process}].
         \begin{figure}[h!]
@@ -45,24 +45,24 @@ The general structure of any convolutional neural network can be categorized as 
             \label{fig:convolution_filter_process}
         \end{figure}
 
-        Each filter in the convolution layer uses the output of the previous layer to connect and calculate. The number of filters are predefined and usually kept in powers of 2. Suppose a layer has 64 filters of dimension $3\times3$, the input image has dimensions of $1000\times1000$, the resulting output will be of dimension $998\times998\times64$. This if passed into another layer with 128 filters of the same dimension, the output will be $996\times996\times128$.
+        Each filter in the convolution layer uses the output of the previous layer to connect and calculate. The number of filters is predefined and usually kept in powers of 2. Suppose a layer has 64 filters of dimension $3\times3$, the input image has dimensions of $1000\times1000$, the resulting output will be of dimension $998\times998\times64$. If this is passed into another layer consisting of 128 filters and the same dimension, the new output will be $996\times996\times128$.
 
     \item \textbf{Pooling layer}:
-        The amount of data after the multi-layer convolution layer is huge. To reduce the time taken for calculations, we need to reduce the size of the matrix. This means we need to reduce the number of parameters of fully-connected layer. This is done by using a pooling layer. The pooling layer finds the eigenvalues of the image, which are then used as the basis of classification. Pooling layer also prevents data from overfitting.
+        The amount of data after the multilayer convolution layer is huge. To reduce the time taken for calculations, we need to reduce the size of the matrix. This means we need to reduce the number of parameters of the fully-connected layer. This is done by using a pooling layer. The pooling layer finds the eigenvalues of the image, which are then used as the basis of classification. The pooling layer also prevents data from overfitting.
 
-        The calculation of the pooled layer is a kind of data resampling. Similar to the convolution layer, the forward propagation is accomplished by a matrix shift similar to a filter. The difference is that the pool is not filtered, and the maximum or average value is calculated. The most common pooling methods are max pooling, mean pooling, and random pooling. In max pooling layer, the maximum value of the values in a pre-specified window replaces the given dataset.If the dataset is replaced by averaging the contents in window, it is called an average pooling layer. The random pooling is selected randomly according to the probability matrix.
+        The pooled layer function similar to data resampling. The filter propagates in the same way as the filters in the convolution layer. The difference between the two is that instead of taking the inner product with the filter, we take the maximum or average value of the window. The most used pooling methods are max pooling, mean pooling, and random pooling layers. In a max-pooling layer, the maximum value of a pre-specified window replaces the given dataset. If the dataset is replaced by averaging the contents in the window, it is called an average pooling layer. A number is selected randomly according to the probability matrix in random pooling.
 
     \item \textbf{Fully connected layer}:
-        Unlike the filters in convolution layer where onyl some pixels sre taken into account, each fully connected layer uses global information of the previous layer. This means each node’s calculation is connected with the weights of all nodes in the previous layer. This is the reason this layer is usually used in the end of the model. 
+        Unlike the filters in the convolution layer where only some pixels are taken into account, each fully connected layer uses the previous layer's global information. This means each node’s calculation is connected with the weights of all nodes in the previous layer. This is the reason this layer is usually used at the end of the model. 
 
-        Because it takes in the global context, this means the complete information recieved from convolution and pooling operations is taken into consideration for output from this layer. Given the outputs, an activation function is applied for classification purposes.
+        Because it takes in the global context, this means the complete information received from convolution and pooling operations is taken into consideration for output from this layer. Given the outputs, an activation function is applied for classification purposes.
 \end{enumerate}
 
 % There are some special types of convolutional layers which perform specific tasks:
 \subsection{Dilated convolution}
 [\textit{Convolution with dilated filter; Also called atrous convolution}]
 
-    Dilated convolutional layers are used in image segmentation where each pixel is labelled by its class. As the name suggests, Dilated convolution is basically dilating the filter before doing the usual convolution. Dilating the filter means expanding taking in distant elements instead of the adjacent elements in the input matrix to calculate weights. These filters are also called upsampled filters. The empty positions in between are filled with zeros, thus making this kind of sparse matrix. The distance in a Dilated convolution filter is determined by the dilation coefficient D(Also called dilation rate). If dilation rate is 1, it means the convolutional kernel is normal, if the dilation rate is 2, then there is skip of one pixel per input. In general, if there is a dilation rate of n, skip of n-1 pixels per input.
+    Dilated convolutional layers are used in image segmentation, where its class labels each pixel. As the name suggests, Dilated convolution is basically dilating the filter before doing the usual convolution. Dilating the filter means expanding, taking in distant elements instead of the adjacent elements in the input matrix to calculate weights. These filters are also called upsampled filters. The empty positions in between are filled with zeros, thus making this kind of sparse matrix. The distance in a Dilated convolution filter is determined by the dilation coefficient D(Also called dilation rate). If the dilation rate is 1, it means it is the standard convolutional kernel. If the dilation rate is 2, then there is a skip of one pixel per input. In general, if there is a dilation rate of n, skip of n-1 pixels per input.
     
     Figure~\ref{fig:dilated_layer} shows how the kernel elements are matched to input elements in a D-dilated 3x3 convolution. Also notice how the dilated convolution layer has increased the spatial context(a.k.a feature maps or receptive field or the field of view) without decreasing the resolution of output.
     \begin{figure}
@@ -74,7 +74,7 @@ The general structure of any convolutional neural network can be categorized as 
 
 
 \subsection{Strided convolution}
-    In a normal convolution, we usually shift the windows by 1 pixel. However, for some large images, it is necessary to shrink feature maps to make computations feasible. In stride convolution, we change length of stride in each step. This means, we skip some input values while performing convolution operations and thus decreasing output dimension. In general, this operation does a trad off between resource consumption and information retrieval.
+    In a regular convolution, we usually shift the windows by 1 pixel. However, for some large images, it is necessary to shrink feature maps to make computations feasible. In stride convolution, we change the length of stride in each step. This means we skip some input values while performing convolution operations and thus decreasing the output dimension. In general, this operation does a trad off between resource consumption and information retrieval.
 
 
 
@@ -84,13 +84,9 @@ The general structure of any convolutional neural network can be categorized as 
 
 
 \section{Encoder-Decoder}
-The encoder-decoder architecture is the standard neural machine translation method that rivals and in some cases outperforms classical statistical machine translation methods.
+The encoder-decoder architecture is the standard neural machine translation method that rivals and, in some cases, outperforms classical statistical machine translation methods.
 
-Though this architecture is very new, having only been pioneered in 2014. The Encoder-Decoder architecture has become an effective and standard approach for sequence-to-sequence (seq2seq) predictions. Road detection needs sequence-to-sequence learning framework to keep track of spatial characteristics. It has three components: an encoder network, a decoder network, and an intermediate network.
-
-Theoretically, encoder and decoder parts can be used independent of each other. An encoder network is used to map raw inputs to feature representations, and a decoder network to take this feature representation as input, process it to make its decision, and produce an output. neural encoder and decoders are often used together due to good performance on various tasks and is thus called an encoder-decoder network.
-
-
+Though this architecture is very new, having only been pioneered in 2014. The Encoder-Decoder architecture has become a modern approach for sequence-to-sequence (seq2seq) predictions. Road detection needs a sequence-to-sequence learning framework to keep track of spatial characteristics. It has three components: an encoder network, a decoder network, and an intermediate network.
 
 % In a CNN, an encoder-decoder network typically looks like this (a CNN encoder and a CNN decoder):
 
@@ -102,7 +98,8 @@ Theoretically, encoder and decoder parts can be used independent of each other. 
 
 % An encoder is a network (FC, CNN, RNN, etc) that takes the input, and output a feature map/vector/tensor. These feature vector hold the information, the features, that represents the input. The decoder is again a network (usually the same network structure as encoder but in opposite orientation) that takes the feature vector from the encoder, and gives the best closest match to the actual input or intended output.
 
-The encoders are trained with the decoders. There are no labels (hence unsupervised). The loss function is based on computing the delta between the actual and reconstructed input. The optimizer will try to train both encoder and decoder in such a way that the features that matter the most should have lower reconstruction loss. This also means that, given an encoded sequence, we do not try to reconstruct the actual input, but rather try to map inputs to certain outputs. For example, given a road map it to true and map everything else to false. This is how a Lossy compression algorithm helps us in segmentation of an image.
+The encoders are trained with the decoders. There are no labels (hence unsupervised). The loss function is based on computing the delta between the actual and reconstructed input. The optimizer will try to train both encoder and decoder in such a way that the features that matter the most should have lower reconstruction loss. This also means that, given an encoded sequence, we do not try to reconstruct the actual input, but rather try to map inputs to specific outputs. For example, given a map, it maps roads to true and assigns everything else to false. This is how a Lossy compression algorithm helps us in the segmentation of an image.
+
 
 % , essentially. Suppose you have a vector v that is represented by 11 values and you use an encoder to reduce that vector to being represented by 10 values through matrix/vector multiplication. Eigen Decomposition, Moore-Penrose Pseudoinverses. That sort of crap. The decoder transforms it back to 11 values, but an approximation of the original 11 values. I believe a simple form of the process is known as PCL. Data loss can be absolutely minimized for a known data set once the decoded approximation is calculated, and the encoder and decoder can be tuned appropriately.
 
@@ -118,9 +115,8 @@ The encoders are trained with the decoders. There are no labels (hence unsupervi
 % Decoder- given the entire sentence, it predicts an output at each time step.
 
 
-% Encoder: Maps (sensory) input data to a different (often lower dimensional, compressed) feature representation.
-% Decoder: Maps the feature representation back into the input data space.
-
+% Encoder: Maps (sensory) 
+% Decoder: 
 % In a perfect Encoder plus Decoder network (also referred to as autoencoder) the input into the encoder is matching the output of the decoder, such that the network is able to reconstruct its own input.
 
 
