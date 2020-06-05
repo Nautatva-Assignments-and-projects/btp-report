@@ -1,14 +1,14 @@
 \chapter{Handling Data for training the model}\label{chapt:data}
-[\textit{As stated before [in \ref{chapt:problem}], In this work report, I will be using images from setinel-2A.}]
+\textit{As stated before in [\ref{chapt:problem}], Images from Sentinel-2A have been used.}
 
 \section{Get the raw training dataset}
 Data needed for training the model is divided into two parts: (a) Satellite image and the (b) Labelled dataset of Roads. Both (a) and (b) should be from the same geography.
 
-Satellite images for Sentinel-2A are available at \url{https://scihub.copernicus.eu/dhus/}. For deep learning, a very accurately labeled dataset is crucial for model training. The pixel-level dataset is challenging to produce in any small community. This is when the web-map services come into the picture. One of the popular mapping services is the Open Street Map(OSM), which has been widely used to find the road vectors. I will use out satellite images with the road vectors obtained from OSM. An advantage of using OSM is that many human resources are saved, and the main work can be focussed on writing code to validate the research, thus making the process efficient.
+Satellite images for Sentinel-2A are available at \url{https://scihub.copernicus.eu/dhus/}. For deep learning, a very accurately labeled dataset is crucial for model training. The pixel-level dataset is challenging to produce in any small community. This is when the web-map services come into the picture. One of the popular mapping services is the Open Street Map~(OSM), which has been widely used to find the road vectors. I will use out satellite images with the road vectors obtained from OSM. An advantage of using OSM is that many human resources are saved, and the main work can be focussed on writing code to validate the research, thus making the process efficient.
 
 
 \section{Converting data to a usable form}
-Even after obtaining the satellite image and road dataset for the same geographical area, the final result image is quite big for DCNN to handle. \ref{chapt:problem}. To solve this problem, I sliced the image into multiple images of size 544*544 (Figure~\ref{fig:run_split_images}). This results in multiple small images which can be handled well by a computer (16GB RAM). This size can be decreased or increased depending on the specifications of the computer used.
+Even after obtaining the satellite image and road dataset for the same geographical area, the final result image is quite big for Deep Convolutional Neural Network~(DCNN) to handle. \ref{chapt:problem}. To solve this problem, I sliced the image into multiple images of size $544\times544$ (Figure~\ref{fig:run_split_images}). This results in multiple small images which can be handled well by a computer (16~GB RAM). This size can be decreased or increased depending on the specifications of the computer used.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{run_split_image}
@@ -26,7 +26,7 @@ The images with less or no roads are removed from the dataset. This is so that `
 \section{Handling the noise generated to improve training}
 Now that the models are chosen, we will now try to link the output of the super-resolution model to the input of road-detector. As specified earlier, our road-detection model assumes the training and input dataset ideally is a pixel-level accurate map. This is a problem as no super-resolution model can be 100 percent accurate. Thus, this underlying condition needs to be handled to reduce false predictions in the model.
 
-The datasets constructed from a map suffers from two types of labeled noises[Figure~\ref{fig:noise_types}]:
+The datasets constructed from a map suffers from two types of labeled noises [Figure~\ref{fig:noise_types}]:
 \begin{itemize}
   % TODO: Reduce the vertical spacing
   \item Omission noise is when the map is incomplete. It is true for small roads and alleys.
