@@ -2,7 +2,6 @@
 [\textit{The idea of using satellite data has been researched within many communities. Several automated and semi-automated ways are proposed to tackle the problem of detecting roads. These ways are quite different due to the different strategies and algorithms used by them. The different strategies come into the picture to tackle the various challenged like noisy data, occlusions, distortion and complex backgrounds which appears in images.}]
 
 \section{Road detection}
-% TODO: Add a image comparing road detection algorithms
 The journey to digitally identify the roads started with the topic of reducing cost and increasing productivity. One of the first road detection algorithms were static methods and focused on the color and geometry of roads. This was quite unreliable as shadows on roads had a similar color range, this resulted in many errors and discontinuities \cite{Detecting_interections_using_color,Detecting_roads_using_color}. Another disadvantage was the need for high-resolution images (Almost 0.2~m-0.5~m), which is hard to get. The idea was then improvised to include texture cues for road detection \cite{using_texture_for_road_detection,baumgartner1999automatic}. The accuracy was indeed better, but the need for a very high-resolution image remained a problem. With the Machine learning techniques, the pixel-level classification started to give improved performance \cite{road_detection_using_neural_nets_SVM,road_detection_using_env_learning,road_detection_using_SVM_online_learning}.
 
 The SVM methods have a good generalization ability and thus widely used in object detection from a given image. They are, at most times, more accurate and give consistent robust results than other classification techniques such as K-nearest neighbor. Nevertheless, the estimation of kernel functions and the choice of the dimensional space and training samples have a hard time. % \cite{Yager and Sowmya (2003) and Melgani and Bruzzone (2004)}
@@ -11,7 +10,14 @@ exploited the SVM classifier by using edge-based features such as gradient, inte
 
 In 2003, Tu-Ko presented a robust approach, in which a back-propagation(BP) neural network was trained with the spectral and edge information to find the road centerline. Although errors prop in, the model was still useful as a whole. Disadvantages of BP neural network include slow convergence speed, the need for an extensive training data set, inability to find global minima, and over-fitting risks. Since then, many types of neural networks like fuzzy neural networks \cite{mokhtarzade2008automatic} and Convolutional Neural Networks(CNN) have been used to capture the spacial contexts of road networks, giving much better accuracies on fewer resources.
 
-With the developments of GPUs and the progress of ResNet architectures, even Deep Convolutional Neural Networks(DCNN) have been researched and changed the way road extraction works. The recent developments with encoder-decoders, dilations, and fuzzy logic have inspired state-of-the-art algorithms like UNet, SegNet, LinkNet, and its further improvements like D-LinkNet and AD-LinkNet. Moreover, competitions pitch in the researchers by providing them with a precise dataset and motivating them to thrive and excel in the world race.
+With the developments of GPUs and the progress of ResNet architectures, even Deep Convolutional Neural Networks(DCNN) have been researched and changed the way road extraction works. The recent developments with encoder-decoders, dilations, and fuzzy logic have inspired state-of-the-art algorithms like UNet, SegNet, LinkNet, and its further improvements like D-LinkNet and AD-LinkNet (Figure~\ref{fig:compare_road}). Moreover, competitions pitch in the researchers by providing them with a precise dataset and motivating them to thrive and excel in the world race.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{compare_road}
+  \caption[Comparison of different Road-detection models.]{Comparison of different Road-detection models. Adapted from \cite{AD-LinkNet}}
+  \label{fig:compare_road}
+\end{figure}
 
 
 \section{Super-resolution}
@@ -24,7 +30,7 @@ With the break-through changes brought by concepts of skip-connects and residual
 
 EDSR proposes using a modified type of residual block to remove the unnecessary elements and optimize the model's performance. Secondly, a new architecture is used with fewer parameters but showing comparable performance. The Figure~\ref{fig:compare_SR} shows a comparison between different SR algorithms.
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{compare_SR}
   \caption[Comparison of different Super-resolution models.]{Comparison of different Super-resolution models. HR is raw high resolution image taken. Adapted from \cite{EDSR}}

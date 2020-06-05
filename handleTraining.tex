@@ -23,19 +23,17 @@ Though the data is from OSM by multiple collaborators, it is more or less in a r
 The images with less or no roads are removed from the dataset. This is so that `the no road` data should not affect the weights used to identify roads. This step is significant because roads often make up a tiny part of satellite images, and most training images will have no roads on them.
 
 
-% \section{Handling pixel-level errors due to super-resolution}
-
-
 \section{Handling the noise generated to improve training}
 Now that the models are chosen, we will now try to link the output of the super-resolution model to the input of road-detector. As specified earlier, our road-detection model assumes the training and input dataset ideally is a pixel-level accurate map. This is a problem as no super-resolution model can be 100 percent accurate. Thus, this underlying condition needs to be handled to reduce false predictions in the model.
 
 The datasets constructed from a map suffers from two types of labeled noises[Figure~\ref{fig:noise_types}]:
 \begin{itemize}
+  % TODO: Reduce the vertical spacing
   \item Omission noise is when the map is incomplete. It is true for small roads and alleys.
   \item Registration noise is when the location of the object is inaccurate. This noise is quite common, as maintaining pixel-level accuracy is quite difficult to produce.
 \end{itemize}
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \begin{subfigure}{0.63\textwidth}
     \includegraphics[width=\textwidth]{noise_omission}
@@ -45,8 +43,8 @@ The datasets constructed from a map suffers from two types of labeled noises[Fig
     \includegraphics[width=\textwidth]{noise_registration}
     \caption{}
   \end{subfigure}
-  \caption[Types of noises in a dataset]{Types of noises in a dataset (a)~Omission noise (b)~noise registration.}%
-  \label{fig:noise_types}%
+  \caption[Types of noises in a dataset]{Types of noises in a dataset (a)~Omission noise (b)~noise registration.}
+  \label{fig:noise_types}
 \end{figure}
 
 These kinds of errors in the training labels reduce the accuracy of classifiers trained with this data. To solve this we use a proper loss function during training to out road-detection model.

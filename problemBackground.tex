@@ -36,7 +36,7 @@ This might be possible for massive supercomputers, but a general workstation has
 
 Our input image does not have a sufficiently high resolution to identify small roads. To deal with this problem of pixelization, we will be using two types of models. This setup is shown in Figure~\ref{fig:model_complete_without_labels}. Unless specifically mentioned, a model means a combined setup using super-resolution and road-detection models. Data from the input layer goes to the super-resolution model, which is consequently passed to the road-detection model. The final output consists of the predicted road network in the image.
 
-\begin{figure}
+\begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{model_complete_without_labels}
   \caption{Complete setup: Combination of Super-resolution and road-detection models.}

@@ -64,7 +64,7 @@ The general structure of any convolutional neural network can be categorized as 
     Dilated convolutional layers are used in image segmentation, where its class labels each pixel. As the name suggests, Dilated convolution is basically dilating the filter before doing the usual convolution. Dilating the filter means expanding, taking in distant elements instead of the adjacent elements in the input matrix to calculate weights. These filters are also called upsampled filters. The empty positions in between are filled with zeros, thus making this kind of sparse matrix. The distance in a Dilated convolution filter is determined by the dilation coefficient D(Also called dilation rate). If the dilation rate is 1, it means it is the standard convolutional kernel. If the dilation rate is 2, then there is a skip of one pixel per input. In general, if there is a dilation rate of n, skip of n-1 pixels per input.
     
     Figure~\ref{fig:dilated_layer} shows how the kernel elements are matched to input elements in a D-dilated 3x3 convolution. Also notice how the dilated convolution layer has increased the spatial context(a.k.a feature maps or receptive field or the field of view) without decreasing the resolution of output.
-    \begin{figure}
+    \begin{figure}[h!]
         \centering
         \includegraphics[width=0.5\textwidth]{cnn_dilated_layer}
         \caption[Dilated convolution layer]{Notice how dilated convolution layer increases the capture of spatial context. Dilation rate is 2 in this figure.}
@@ -76,7 +76,7 @@ The general structure of any convolutional neural network can be categorized as 
     In a regular convolution, we usually shift the windows by 1 pixel. However, for some large images, it is necessary to shrink feature maps to make computations feasible. In stride convolution, we change the length of stride in each step. This means we skip some input values while performing convolution operations and thus decreasing the output dimension. In general, this operation does a trad off between resource consumption and information retrieval.
 
 
-\section[Residual Blocks]{Residual Blocks - Going deeper into Convolutional Neural Networks}
+\section[Residual Networks]{Residual Networks}
 
 In a neural network, weights receive an update proportional to the gradient of current weight in each iteration. \begin{equation} ChangeInWeight_{i} \propto \frac{\partial(ErrorFunction)}{\partial(weight_{i})} \end{equation} When the gradient of the training model becomes vanishingly small, the change in weight becomes negligible, and thus model training essentially stops. This problem is called the problem of vanishing gradient.
 
