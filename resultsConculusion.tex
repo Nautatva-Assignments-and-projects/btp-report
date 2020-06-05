@@ -1,9 +1,9 @@
 \chapter{Results}\label{chapt:results}
 
-With so much to talk in this report, everything can be summarised into a small picture - Figure~\ref{fig:the_complete_picture}
+With so much to talk in this report, everything can be summarised into a small picture - \cref{fig:the_complete_picture}
 
 \section{Pros}
-The model predicted most of the roads, which were predicted by the model without super-resolution. Apart from that, the model also predicted a lot of other small roads. On validating with the ground truth images, I found that this was a very good prediction. Figure~\ref{fig:run_merge_road_maps}
+The model predicted most of the roads, which were predicted by the model without super-resolution. Apart from that, the model also predicted a lot of other small roads. On validating with the ground truth images, I found that this was a very good prediction. Checkout \cref{fig:run_merge_road_maps}
 
 \begin{figure}[h!]
   \centering
@@ -27,7 +27,7 @@ The model predicted most of the roads, which were predicted by the model without
 \section{Cons}
 One of the most noticeable drawbacks of using this model is the amount of time required to get the predictions. 
 
-Another disadvantage is too much affected due to inaccuracies in the training dataset. If the road gets too thick, like, say, we took an image with a little higher resolution, and run the model; we see that our model has several discontinuities in between[Figure~\ref{fig:cons_coverleaf}]. 
+Another disadvantage is, the model is too much affected due to inaccuracies in the training dataset. If the road gets too thick, say, we take an image with a higher resolution, and run the model; we see that our model has several discontinuities in between. Refer [\cref{fig:cons_coverleaf}]. 
 This is mainly because of the noise which has effected the weights. This error can be reduced by training the model with more precise data. Another way to correct this error is to run the algorithm without super-resolution. This means we need to train the model again, this time without super-resolution.
 
 \begin{figure}[h!]
@@ -49,7 +49,7 @@ This is mainly because of the noise which has effected the weights. This error c
 \end{figure}
 
 
-Now that we have two predictions, one with super-resolution and without it, we merge them. First, we need to make them of the same resolutions. We do this by finding out the difference factor. Let us say the difference factor is $X$ on each side; we split the lower resolution image pixels into $X$ different pixels on both sides. Then we average the resultant images of the same resolution. For reference: look at Figure~\ref{fig:roads_in_confidence}
+Now that we have two predictions, one with super-resolution and without it, we merge them. First, we need to make them of the same resolutions. We do this by finding out the difference factor. Let us say the difference factor is $X$ on each side; we split the lower resolution image pixels into $X$ different pixels on both sides. Then we average the resultant images of the same resolution. For reference: look at \cref{fig:roads_in_confidence}
 
 \begin{figure}[h!]
   \begin{subfigure}[b]{0.25\textwidth}
@@ -68,7 +68,7 @@ Now that we have two predictions, one with super-resolution and without it, we m
     \includegraphics[width=\textwidth]{roads_with_confidence}
     \caption{}
   \end{subfigure}
-  \caption[Finding likelihood of roads in predictions]{Merging roads found with \textbf{(a)} Predictions with SR. \textbf{(b)} Predictions without SR. \textbf{(c)} Upscaling of (b). \textbf{(d)} Final result by averaging (a) and (c). Black ones are definitely a road, Grey ones having 0.5 probablity of being a road and  least likely to find a road on the white pixel.}
+  \caption[Finding likelihood of roads in predictions]{Merging roads found with \textbf{(a)} Predictions with SR. \textbf{(b)} Predictions without SR. \textbf{(c)} Upscaling of (b). \textbf{(d)} Final result by averaging (a) and (c). Black ones are definitely a road, grey ones having 0.5 probablity of being a road and least likely to find a road on the white pixel.}
   \label{fig:roads_in_confidence}
 \end{figure}
 

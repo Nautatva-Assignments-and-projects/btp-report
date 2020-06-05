@@ -23,7 +23,7 @@
 % \usepackage{xcolor}
 % \usepackage{libertine}
 % \usepackage{pdfpages}
-% \usepackage[toc,page]{appendix}
+\usepackage[toc,page]{appendix}
 % \usepackage{cite}
 
 % \setlength{\parskip}{\smallskipamount}
@@ -172,15 +172,14 @@
 % \include{acknowledgement}
 
 \tableofcontents
-% TODO: Refernces show end page instead of the first
 \newpage
 
 \listoffigures
-\addcontentsline{toc}{chapter}{\numberline{}List of Figures}%
+\addcontentsline{toc}{chapter}{\numberline{}List of Figures}
 
 \newpage
 \listoftables
-\addcontentsline{toc}{chapter}{\numberline{}List of Tables}%
+\addcontentsline{toc}{chapter}{\numberline{}List of Tables}
 
 \clearpage
 %\includepdf[pages={10}, pagecommand={}]{external.pdf}
@@ -192,7 +191,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% Text body starts here!
 \mainmatter
-
+% TODO: maitain consistency for super-resolution and road-detection. See caps and smalls too!
+% TODO: How to add Nomenclature. Do I need it for aliases?
+% TODO: Checkout capitalisation for references, eg: table, figure, chapter 4.xx
+\include{nomenclature}
 \include{intro}
 \include{problemBackground}
 \include{previousWork}
@@ -200,15 +202,14 @@
 \include{proposedModel}
 \include{handleTraining}
 \include{resultsConculusion}
-%\begin{appendices}
-% TODO: Appendix make the tex file and go about it as usual.
-%\include{nameofappendix}
-%\end{appendices}
+\begin{appendices}
+\include{appendix}
+\end{appendices}
 \normalem
 \bibliographystyle{unsrtnat} 
 %\bibliography{longnamesfirst,semicolon}
 \bibliography{bibliography}
-\addcontentsline{toc}{chapter}{\numberline{}References}%
+\addcontentsline{toc}{chapter}{\numberline{}References}
 
 % % Adding a bibliography if citations are used in the report
 % \bibliographystyle{plain}

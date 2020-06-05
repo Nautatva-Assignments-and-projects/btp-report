@@ -10,39 +10,39 @@ The proposed residual block is fairly simple and is simply 2 convolution layers 
 
 The upsample layer has a convolution and a shuffle layer in an alternating fashion. The shuffle layer is needed to ensure that the learning does not take in any traits and does the upsampling without any bias to any of the features, be it color-based, edge based, pixel-based or due to any complex learning pattern it may have found.
 
-The model as proposed is shown in Figure~\ref{fig:model_EDSR}.
+The model as proposed is shown in \cref{fig:model_EDSR}
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{model_EDSR}
-  \caption[Laying out the Strucutre for EDSR]{Laying out the Strucutre for EDSR~\cite{EDSR}.}
+  \caption[Laying out the strucutre for EDSR]{Laying out the strucutre for EDSR~\cite{EDSR}.}
   \label{fig:model_EDSR}
 \end{figure}
 
 
 \section{D-LinkNet: Finding the road networks in the image}
-As opposed to Super-resolution, road detection is an high-level computer vision problem. It involves finding relationship between features and taking in consideration the spatial context for road-connectivity. In D-LinkNet, the road extraction task is taken as a binary task to generate pixel-level labeling of roads while consideration of neighborhood pixels. Going with deep learning models, we can classify the data by learning the weights during the training phase. However, roads are connected and spatially continuous. To ensure this continuity, we use dilated layers to ensure we store data in weights. Directly using a Fully Connected Network~(FCN) is also an option but the memory requirement for any image is huge to be executed in a practically feasible way.
+As opposed to super-resolution, road detection is an high-level computer vision problem. It involves finding relationship between features and taking in consideration the spatial context for road-connectivity. In D-LinkNet, the road extraction task is taken as a binary task to generate pixel-level labeling of roads while consideration of neighborhood pixels. Going with deep learning models, we can classify the data by learning the weights during the training phase. However, roads are connected and spatially continuous. To ensure this continuity, we use dilated layers to ensure we store data in weights. Directly using a Fully Connected Network~(FCN) is also an option but the memory requirement for any image is huge to be executed in a practically feasible way.
 
 \subsection{Extracting the essential features}
 Considering a large image, we start with a convolution layer with a big window of let's say $7\times7$. To further reduce the computational load, a pooling layer is used. Now that we have some managable represtation of image in a matrix at this step, we start with our actual model. Road detection is a complex task and has many features to be captured. As the number of features increases, we make the CNNs deeper. We use the ResNet architecture to make sure vanishing gradients do not stop us from training a deep CNN model. I used multiple residual blocks and used a pooling layer whenever I felt the data becoming overwhelmingly large. Everytime before a pooling layer, I added the output to the input to make sure data in the image isn't lost.
 
-On an trial and error basis, After some 50 convolution layers, it is seen that features are seperated. To seperate the features and identify the roads, an encoder-decoder architecture is used. It accepts a single element of the input sequence, processes it, collects information from that element, and propagates it forward to the next step. This means that when the encoding is complete, the entire information is available in the intermediate step.
+On an trial and error basis, after some 50 convolution layers, it is seen that features are seperated. To seperate the features and identify the roads, an encoder-decoder architecture is used. It accepts a single element of the input sequence, processes it, collects information from that element, and propagates it forward to the next step. This means that when the encoding is complete, the entire information is available in the intermediate step.
 
 \subsection{Taking in consideration the spacial connectivity of roads}
-Before decoding the output, during the intermediate step, we gather data ensure connectivity using dilated convolution layers. Dilated convolution layers enlarge the receptive field of feature points without reducing the resolution of the image~(\ref{sec:Dilated_Convolution}). Using multiple dilations convolution layer ensures we have spatial context from mutiple different neighborhoods.
+Before decoding the output, during the intermediate step, we gather data ensure connectivity using dilated convolution layers. Dilated convolution layers enlarge the receptive field of feature points without reducing the resolution of the image(Refer \cref{sec:Dilated_Convolution}). Using multiple dilations convolution layer ensures we have spatial context from mutiple different neighborhoods.
 
 As we have the complete sequence available, we use the decoder to decode the sequence we had encoded. Using the encoder-decoder enables us to easily segment the image to make accurate predictions.
 
-The model proposed is given in Figure~\ref{fig:model_D-LinkNet}.
+The model proposed is given in \cref{fig:model_D-LinkNet}
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{model_D-LinkNet}
-  \caption[Laying out the Strucutre for D-LinkNet]{Laying out the Strucutre for D-LinkNet~\cite{D-LinkNet}.}
+  \caption[Laying out the strucutre for D-LinkNet]{Laying out the strucutre for D-LinkNet~\cite{D-LinkNet}.}
   \label{fig:model_D-LinkNet}
 \end{figure}
 
 
-\textbf{This is how we complete the implementation as given in Chapter~\ref{chapt:problem} and as shown in Figure~\ref{fig:model_complete}}
+\textbf{This is how we complete the implementation as given in \cref{chapt:problem} and as shown in \cref{fig:model_complete}}
 
 \begin{figure}[h!]
   \centering
