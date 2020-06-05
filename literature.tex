@@ -57,7 +57,7 @@ The general structure of any convolutional neural network can be categorized as 
         Because it takes in the global context, this means the complete information received from convolution and pooling operations is taken into consideration for output from this layer. Given the outputs, an activation function is applied for classification purposes.
 \end{enumerate}
 
-% There are some special types of convolutional layers which perform specific tasks:
+% TODO: There are some special types of convolutional layers which perform specific tasks:
 \subsection{Dilated convolution}
 [\textit{Convolution with dilated filter; Also called atrous convolution}]
 
@@ -98,39 +98,7 @@ The encoder-decoder architecture is the standard neural machine translation meth
 
 Though this architecture is very new, having only been pioneered in 2014. The Encoder-Decoder architecture has become a modern approach for sequence-to-sequence (seq2seq) predictions. Road detection needs a sequence-to-sequence learning framework to keep track of spatial characteristics. It has three components: an encoder network, a decoder network, and an intermediate network.
 
-% In a CNN, an encoder-decoder network typically looks like this (a CNN encoder and a CNN decoder):
-
-
-% Image credits
-
-% This is a network to perform semantic segmentation of an image. The left half of the network maps raw image pixels to a rich representation of a collection of feature vectors. The right half of the network takes these features, produces an output and maps the output back into the “raw” format (in this case, image pixels).
-
-
-% An encoder is a network (FC, CNN, RNN, etc) that takes the input, and output a feature map/vector/tensor. These feature vector hold the information, the features, that represents the input. The decoder is again a network (usually the same network structure as encoder but in opposite orientation) that takes the feature vector from the encoder, and gives the best closest match to the actual input or intended output.
-
 The encoders are trained with the decoders. There are no labels (hence unsupervised). The loss function is based on computing the delta between the actual and reconstructed input. The optimizer will try to train both encoder and decoder in such a way that the features that matter the most should have lower reconstruction loss. This also means that, given an encoded sequence, we do not try to reconstruct the actual input, but rather try to map inputs to specific outputs. For example, given a map, it maps roads to true and assigns everything else to false. This is how a Lossy compression algorithm helps us in the segmentation of an image.
-
-
-% , essentially. Suppose you have a vector v that is represented by 11 values and you use an encoder to reduce that vector to being represented by 10 values through matrix/vector multiplication. Eigen Decomposition, Moore-Penrose Pseudoinverses. That sort of crap. The decoder transforms it back to 11 values, but an approximation of the original 11 values. I believe a simple form of the process is known as PCL. Data loss can be absolutely minimized for a known data set once the decoded approximation is calculated, and the encoder and decoder can be tuned appropriately.
-
-% It consists of 3 parts: encoder, intermediate vector and decoder.
-
-
-
-
-% Encoder-It accepts a single element of the input sequence at each time step, process it, collects information for that element and propagates it forward.
-
-% Intermediate vector- This is the final internal state produced from the encoder part of the model. It contains information about the entire input sequence to help the decoder make accurate predictions.
-
-% Decoder- given the entire sentence, it predicts an output at each time step.
-
-
-% Encoder: Maps (sensory) 
-% Decoder: 
-% In a perfect Encoder plus Decoder network (also referred to as autoencoder) the input into the encoder is matching the output of the decoder, such that the network is able to reconstruct its own input.
-
-
-% “Generally, the encoder encodes the input sequence to an internal representation called 'context vector' which is used by the decoder to generate the output sequence. The lengths of input and output sequences can be different, as there is no explicit one on one relation between the input and output sequences.”
 
 % \section{Super Resolution}
 

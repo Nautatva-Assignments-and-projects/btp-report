@@ -2,25 +2,24 @@
 [\textit{By combining the power of (a) Super-resolution: EDSR, (b) D-LinkNet and taking care of noise during training, we enhance the accuracy of our deep learning model.}]
 
 \section{Super-resolution: EDSR}
-Our input image does not have sufficiently high resolution to identify small roads. To solve this problem, we use the concept of super-resolution. In this proposal, we plan to use the EDSR model \cite{EDSR}
-This model is based on a modified ResNet architecture and can be used for low-level and high-level computer vision problems. The models as propsed \cite{EDSR} is shown in Figure~\ref{fig:model_EDSR}.
+Our input image does not have sufficiently high resolution to identify small roads. To solve this problem, we use the concept of super-resolution. In this proposal, we plan to use the EDSR model~\cite{EDSR}. This model is based on a modified ResNet architecture and can be used for low-level and high-level computer vision problems. The models as propsed~\cite{EDSR} is shown in Figure~\ref{fig:model_EDSR}.
 
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{model_EDSR}
-  \caption{Laying out the Strucutre for EDSR \cite{EDSR}.}
+  \caption{Laying out the Strucutre for EDSR~\cite{EDSR}.}
   \label{fig:model_EDSR}
 \end{figure}
 
 \section{D-LinkNet: Finding the road networks in the image}
-Finding roads is a segmentation task. In D-LinkNet, the road extraction task is taken as a binary task to generate pixel-level labeling of roads. Going with deep learning models, we can classify the data by learning the weights during the training phase. However, roads are connected and spatially continuous. To take this continuity into account, we try out a fully connected network[FCN]. FCN can produce a segmentation map for an entire input image in a single forward pass. Based on FCN's, a semantic segmentation network, named D-LinkNet is propsed \cite{D-LinkNet}.
+Finding roads is a segmentation task. In D-LinkNet, the road extraction task is taken as a binary task to generate pixel-level labeling of roads. Going with deep learning models, we can classify the data by learning the weights during the training phase. However, roads are connected and spatially continuous. To take this continuity into account, we try out a fully connected network[FCN]. FCN can produce a segmentation map for an entire input image in a single forward pass. Based on FCN's, a semantic segmentation network, named D-LinkNet is propsed~\cite{D-LinkNet}.
 
 D-LinkNet uses an encoder-decoder architecture that accepts a single element of the input sequence, processes it, collects information from that element, and propagates it forward to the next step. This means that when the encoding is complete, the entire information is available in the intermediate step. This intermediate step is handled by using dilated convolution layers, which enlarge the receptive field of feature points without reducing the resolution of the image. Due to the complete sequence available, the decoder can make accurate predictions at each time step.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=\textwidth]{model_D-LinkNet}
-  \caption{Laying out the Strucutre for D-LinkNet \cite{D-LinkNet}.}
+  \caption{Laying out the Strucutre for D-LinkNet~\cite{D-LinkNet}.}
   \label{fig:model_D-LinkNet}
 \end{figure}
 
@@ -33,9 +32,3 @@ D-LinkNet uses an encoder-decoder architecture that accepts a single element of 
   \caption{Using EDSR and D-LinkNet together.}
   \label{fig:model_complete}
 \end{figure}
-
-
-% \section{Applying models}
-% The idea is to use super-resolution to enhance the resolution of the image and then use it to identify roads. This naturally means I take up two models: one for applying super-resolution techniques and the other for detecting roads from the images.
-
-% Here, road segmentation is solved by generating pixel-level labeling of roads. This is done by a binary decision which we get from semantic segmentation.
