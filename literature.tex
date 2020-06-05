@@ -40,8 +40,7 @@ The general structure of any convolutional neural network can be categorized as 
             \includegraphics[width=\textwidth]{cnn_filter_output}
             \caption{}
             \end{subfigure}
-            \caption[The process of convolution]{The process of convolution: (a) Input vector. (b) Filter being convoluted on (a). (c) Result of (b) convoluting over (a). (d) Final result after applying activation function $a_{i,j}>2$. % TODO: (a), (c) seems wierd. same for (a), (d).
-            }
+            \caption[The process of convolution]{The process of convolution: (a) Input vector. (b) Filter being convoluted on (a). (c) Result of (b) convoluting over (a). (d) Final result after applying activation function $a_{i,j}>2$.}
             \label{fig:convolution_filter_process}
         \end{figure}
 
@@ -77,11 +76,22 @@ The general structure of any convolutional neural network can be categorized as 
     In a regular convolution, we usually shift the windows by 1 pixel. However, for some large images, it is necessary to shrink feature maps to make computations feasible. In stride convolution, we change the length of stride in each step. This means we skip some input values while performing convolution operations and thus decreasing the output dimension. In general, this operation does a trad off between resource consumption and information retrieval.
 
 
+\section[Residual Blocks]{Residual Blocks - Going deeper into Convolutional Neural Networks}
 
-% TODO: Complete this section.
-% \section{Residual Blocks}
-% [\textit{Going deeper into Convolutional Neural Networks}]
+In a neural network, weights receive an update proportional to the gradient of current weight in each iteration. \begin{equation} ChangeInWeight_{i} \propto \frac{\partial(ErrorFunction)}{\partial(weight_{i})} \end{equation} When the gradient of the training model becomes vanishingly small, the change in weight becomes negligible, and thus model training essentially stops. This problem is called the problem of vanishing gradient.
 
+Conventionally, as the CNNs become deeper, the problems related to vanishing gradients became severe. To solve this problem, {Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun}\cite{ResNet} developed the concept of residual networks(Also called ResNet or skip connections). Residual neural networks tackle vanishing gradients by skipping connections or making shortcuts to jump over some layers (Figure~\ref{fig:residual_network}). Typical ResNet models are implemented with double- or triple- layer skips that contain nonlinearities (ReLU) and batch normalization in between.
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.2\textwidth]{lit_resnet}
+    \caption[A residual network]{Canonical form of a residual neural network. Layer-2 is skipped over activation from Layer-1.}
+    \label{fig:residual_network}
+\end{figure}
+
+While training, an additional matrix can be used to train the skip connections as well. These are usually identity matrices and not so hard on memory; hence they can be used to quickly train much deeper networks than what was achieved with the conventional neural networks. ResNet also increases performance while training the model. This is due to the face that some layers are essentially skipped, and the gradients that were earlier vanishing now converge faster.
+
+Many improvements to the original ResNet architecture have been made since its inception. Pre-trained models like ResNet (34, 50, 101) are already available in popular libraries like Tensorflow and PyTorch. ResNet is considered one of the most significant innovations in the area of neural networks
 
 \section{Encoder-Decoder}
 The encoder-decoder architecture is the standard neural machine translation method that rivals and, in some cases, outperforms classical statistical machine translation methods.

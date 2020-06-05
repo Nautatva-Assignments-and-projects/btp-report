@@ -28,7 +28,8 @@ We will be using RGB images from satellite sentinel-2A. Detailed parameters of t
   \label{tab:sentinel-resolution}
 \end{table}
 
-By combining the three bands from the raw satellite image, the resulting image size is of the order of 400~MB for one mid-sized city. At first, this may not seem significant in comparison with some of the media files. However, handling files of this size in DCNN is a severe issue. Let us see the specifications needed by a computer to handle this image in 1 go:
+By combining the three bands from the raw satellite image, the resulting image size is of the order of 400~MB for one mid-sized city. At first, this may not seem significant in comparison with some of the media files. However, handling files of this size in DCNN is a severe issue. 
+% Let us see the specifications needed by a computer to handle this image in 1 go:
 % TODO: Calculations showing 400MB in DCNN
 
 This might be possible for massive supercomputers, but a general workstation has RAM anywhere from 128 to 256 GB RAM, while personal computers range from 8 GB to 32 GBs RAM. Thus, this image must be divided into several parts so that our algorithms work on a readily available device.
