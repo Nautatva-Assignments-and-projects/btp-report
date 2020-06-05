@@ -2,7 +2,7 @@
 \textit{As stated before in [\ref{chapt:problem}], Images from Sentinel-2A have been used.}
 
 \section{Get the raw training dataset}
-Data needed for training the model is divided into two parts: (a) Satellite image and the (b) Labelled dataset of Roads. Both (a) and (b) should be from the same geography.
+Data needed for training the model is divided into two parts: \textbf{(a)} Satellite image and the \textbf{(b)} Labelled dataset of Roads. Both (a) and (b) should be from the same geography.
 
 Satellite images for Sentinel-2A are available at \url{https://scihub.copernicus.eu/dhus/}. For deep learning, a very accurately labeled dataset is crucial for model training. The pixel-level dataset is challenging to produce in any small community. This is when the web-map services come into the picture. One of the popular mapping services is the Open Street Map~(OSM), which has been widely used to find the road vectors. I will use out satellite images with the road vectors obtained from OSM. An advantage of using OSM is that many human resources are saved, and the main work can be focussed on writing code to validate the research, thus making the process efficient.
 
@@ -43,7 +43,7 @@ The datasets constructed from a map suffers from two types of labeled noises [Fi
     \includegraphics[width=\textwidth]{noise_registration}
     \caption{}
   \end{subfigure}
-  \caption[Types of noises in a dataset]{Types of noises in a dataset (a)~Omission noise (b)~noise registration.}
+  \caption[Types of noises in a dataset]{Types of noises in a dataset \textbf{(a)}~Omission noise \textbf{(b)}~noise registration.}
   \label{fig:noise_types}
 \end{figure}
 

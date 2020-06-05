@@ -19,7 +19,7 @@ The model predicted most of the roads, which were predicted by the model without
     \includegraphics[width=\textwidth]{sat_image_run}
     \caption{}
   \end{subfigure}
-  \caption[Predictions]{(a) Predictions using our model. (b) Predictions just using the road-detection model. (c) Image used to find predictions. Comparing the original road-detection model with the improved model.}
+  \caption[Predictions]{\textbf{(a)} Predictions using our model. \textbf{(b)} Predictions just using the road-detection model. \textbf{(c)} Image used to find predictions. Comparing the original road-detection model with the improved model.}
   \label{fig:run_merge_road_maps}
 \end{figure}
 
@@ -44,7 +44,7 @@ This is mainly because of the noise which has effected the weights. This error c
     \includegraphics[width=\textwidth]{cons_road_coverleaf_sr}
     \caption{}
   \end{subfigure}
-  \caption[Problem in predictions large roads]{(a) The image to apply the model on. (b) Road detection without applying super-resolution. (c) Road detection by out model. When a wide road is to be predicted, the noise takes over and our predictions go horribly wrong.}
+  \caption[Problem in predictions large roads]{\textbf{(a)} The image to apply the model on. \textbf{(b)} Road detection without applying super-resolution. \textbf{(c)} Road detection by out model. When a wide road is to be predicted, the noise takes over and our predictions go horribly wrong.}
   \label{fig:cons_coverleaf}
 \end{figure}
 
@@ -68,7 +68,7 @@ Now that we have two predictions, one with super-resolution and without it, we m
     \includegraphics[width=\textwidth]{roads_with_confidence}
     \caption{}
   \end{subfigure}
-  \caption[Finding likelihood of roads in predictions.]{Merging roads found with (a) Predictions with SR, (b) Predictions without SR. (c) Upscaling of (b) and (d) Final result by averaging (a) and (c). Black ones are definitely a road, Grey ones having 0.5 probablity of being a road and  least likely to find a road on the white pixel.}
+  \caption[Finding likelihood of roads in predictions]{Merging roads found with \textbf{(a)} Predictions with SR. \textbf{(b)} Predictions without SR. \textbf{(c)} Upscaling of (b). \textbf{(d)} Final result by averaging (a) and (c). Black ones are definitely a road, Grey ones having 0.5 probablity of being a road and  least likely to find a road on the white pixel.}
   \label{fig:roads_in_confidence}
 \end{figure}
 
