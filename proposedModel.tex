@@ -10,7 +10,7 @@ The proposed residual block is fairly simple and is simply two convolution layer
 
 The upsample layer has a convolution and a shuffle layer in an alternating fashion. The shuffle layer is needed to ensure that the learning does not learn any features to cause bias in upsampling. The features might be color-based, edge-based, pixel-based, or some intricate learned pattern.
 
-The model as proposed is shown in \cref{fig:model_EDSR}
+The model as proposed is shown in \cref{fig:model_EDSR}.
 
 \begin{figure}[h!]
   \centering
@@ -29,11 +29,11 @@ Considering a large image, we start with a convolution layer with a big window t
 On a trial and error basis, after some 50 convolution layers, it is seen that features are separated. To separate the features, and identify the roads, an encoder-decoder architecture is used. It accepts a single element of the input sequence, processes it, collects information from that element, and propagates it to the next step. This means that when the encoding is complete, the entire information is available in the intermediate step.
 
 \subsection{Taking into consideration the spacial connectivity of roads}
-Before decoding the output, during the intermediate step, we gather data to ensure connectivity using dilated convolution layers. Dilated convolution layers enlarge the receptive field of feature points without reducing the resolution of the image(Refer \cref{sec:Dilated_Convolution}). Using multiple dilations convolution layer ensures we have spatial context from multiple different neighborhoods.
+Before decoding the output, during the intermediate step, we gather data to ensure connectivity using dilated convolution layers. Dilated convolution layers enlarge the receptive field of feature points without reducing the resolution of the image~(Refer \cref{sec:Dilated_Convolution}). Using multiple dilations convolution layer ensures we have spatial context from multiple different neighborhoods.
 
 As we have the complete sequence available, we use the decoder to decode the sequence we had encoded. Using the encoder-decoder enables us to segment the image to make accurate predictions easily.
 
-The model proposed is given in \cref{fig:model_D-LinkNet}
+The model proposed is given in \cref{fig:model_D-LinkNet}.
 \begin{figure}[h!]
   \centering
   \includegraphics[width=\textwidth]{model_D-LinkNet}
@@ -42,7 +42,7 @@ The model proposed is given in \cref{fig:model_D-LinkNet}
 \end{figure}
 
 
-\textbf{This is how we complete the implementation as given in \cref{chapt:problem} and as shown in \cref{fig:model_complete}}
+\textbf{This is how we complete the implementation as given in \cref{chapt:problem} and as shown in \cref{fig:model_complete}.}
 
 \begin{figure}[h!]
   \centering

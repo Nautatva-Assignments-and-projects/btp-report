@@ -1,5 +1,5 @@
 \chapter{Code}\label{chapt:code}
-\textbf{The code can be found at https://nautatva.github.io/btp/code}
+\textbf{The code can be found at \href{https://nautatva.github.io/btp/code}.}
 
 \section{Summary}
 \textbf{Language programmed}: Python 3.8 \bigskip \\
@@ -11,7 +11,7 @@
 \subsection{Installing GDAL}
 A satellite image bit depth is usually 16 bits, and conventional images are 8-bit images. Thus, most of the common python libraries, such as PIL, openCV cannot be used due to information loss. We, therefore, use GDAL and scikit-image libraries to read and write images.
 
-The easiest way to install GDAL is by using anaconda. Install anaconda from \href{https://www.anaconda.com/products/individual#Downloads} and run \mint{bash}{conda install -y gdal} on command line(CMD) or terminal.
+The easiest way to install GDAL is by using anaconda. Install anaconda from \href{https://www.anaconda.com/products/individual#Downloads} and run \mintinline{bash}{conda install -y gdal} on command line~(CMD) or terminal.
 
 
 \subsection{Read and write an image}
@@ -33,7 +33,7 @@ To ensure the image can be processed on a personal computer, we use the \texttt{
 df = image.split('source', path(root_path, 'sliced'))  # df contains all the details of the smaller images. These small images are stored in the `sliced` directory
 \end{minted}
 
-\subsection{Input}
+\subsection*{Input}
 \begin{itemize}
   \setlength\itemsep{1mm}
   \item The split function takes in an image or a folder path containing images and folder path for output as input.
@@ -41,44 +41,45 @@ df = image.split('source', path(root_path, 'sliced'))  # df contains all the det
   \item Other optional parameters are StrideX and StrideY, which set the value of the image to be slid after cropping up. Default values are set to be 540 for both.
 \end{itemize}
 
-\subsection{Output}
+\subsection*{Output}
 \begin{itemize}
   \setlength\itemsep{1mm}
   \item The function returns an array with the details of how the image is split.
-  \item The files are always of dimension SliceX x SliceY
+  \item The files are always of dimension $SliceX\times SliceY$.
   \item The name convention for images saved is \newline
     nameOfImage\_\_InitialY\_InitialX\_sliceHeight\_sliceWidth\_padding\_TotalWidth\_TotalHeight \newline
-    (with the required extension.)
+    (with the required extension).
 \end{itemize}
 
 
-\subsection{Example}
-\textbf{Input}:
-\begin{itemize}
-  \setlength\itemsep{1mm}
-  \item \textbf{Name of Image}: coverleaf.jpg
-  \item \textbf{Stride X}: 540
-  \item \textbf{Stride Y}: 540
-  \item \textbf{SliceX}: 544
-  \item \textbf{SliceY}: 544
-\end{itemize}
+\subsection*{Example}
+\begin{itemize}[label={}]
+  \item\textbf{Input}:
+  \begin{itemize}[{\textbullet}]
+    \setlength\itemsep{1mm}
+    \item \textbf{Name of Image}: coverleaf.jpg
+    \item \textbf{Stride X}: 540
+    \item \textbf{Stride Y}: 540
+    \item \textbf{SliceX}: 544
+    \item \textbf{SliceY}: 544
+  \end{itemize}
 
-\textbf{Property of image}:
-\begin{itemize}
-  \setlength\itemsep{1mm}
-  \item Width of image: 864
-  \item Height of image: 864
-\end{itemize}
+  \item\textbf{Property of image}:
+  \begin{itemize}[{\textbullet}]
+    \setlength\itemsep{1mm}
+    \item Width of image: 864
+    \item Height of image: 864
+  \end{itemize}
 
-\textbf{The output files are named}:
-\begin{itemize}[>]
-  \setlength\itemsep{1mm}
-  \item coverleaf\_\_0\_0\_544\_544\_0\_864\_864
-  \item coverleaf\_\_0\_320\_544\_544\_0\_864\_864
-  \item coverleaf\_\_320\_0\_544\_544\_0\_864\_864
-  \item coverleaf\_\_320\_320\_544\_544\_0\_864\_864
+  \item\textbf{The output files are named}:
+  \begin{itemize}[>]
+    \setlength\itemsep{1mm}
+    \item coverleaf\_\_0\_0\_544\_544\_0\_864\_864
+    \item coverleaf\_\_0\_320\_544\_544\_0\_864\_864
+    \item coverleaf\_\_320\_0\_544\_544\_0\_864\_864
+    \item coverleaf\_\_320\_320\_544\_544\_0\_864\_864
+  \end{itemize}
 \end{itemize}
-
 \section{Super Resolution}
 For applying super-resolution on one image, use \texttt{`apply\_sr'}. When applying SR on multiple images, copy them into a folder, and use \texttt{`batch\_SR'}. You can download my trained weights from \href{https://nautatva.github.io/btp/weight/sr}{here}.
 

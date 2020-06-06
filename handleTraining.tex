@@ -20,7 +20,7 @@ Even after obtaining the satellite image and road dataset for the same geographi
 \section{Cleaning the obtained dataset}
 Though the data is from OSM by multiple collaborators, it is more or less in a raw format and prone to errors. Given its open-source in nature, it may be outdated or, in some cases, need some corrections. These corrections need to be manually done to ensure the training data is accurate before being fed into our model.
 
-The images with less or no roads are removed from the dataset. This is done so that `the no road` data should not affect the weights used to identify roads. This step is significant because roads often make up a tiny part of satellite images, and most training images will have no roads on them.
+The images with less or no roads are removed from the dataset. This is done so that `the-no-road' data should not affect the weights used to identify roads. This step is significant because roads often make up a tiny part of satellite images, and most training images will have no roads on them.
 
 
 \section{Handling the noise generated to improve training}
@@ -43,7 +43,7 @@ The datasets constructed from a map suffers from two types of labeled noises (\c
     \includegraphics[width=\textwidth]{noise_registration}
     \caption{}
   \end{subfigure}
-  \caption[Types of noises in a dataset]{Types of noises in a dataset \textbf{(a)}~Omission noise \textbf{(b)}~noise registration.}
+  \caption[Types of noises in a dataset]{Types of noises in a dataset \textbf{(a)}~Omission noise \textbf{(b)}~Noise registration.}
   \label{fig:noise_types}
 \end{figure}
 

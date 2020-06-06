@@ -1,34 +1,55 @@
-\chapter{Nomenclature}\label{tab:nomenclature}
+\nomenclature[D]{OSM}{Open Street Map}
+\nomenclature[D]{RGB}{Red. Green, Blue}
+\nomenclature[D]{HR}{High Resolution}
+\nomenclature[M]{AI}{Artificial Intelligence}
+\nomenclature[M]{ML}{Machine Learning}
+\nomenclature[M]{PSNR}{Peak Signal-to-Noise Ratio}
+\nomenclature[M]{BP}{Back Propagation}
+\nomenclature[M]{SVM}{Support Vector Machine}
+\nomenclature[M]{ReLU}{Rectified Linear Unit}
+\nomenclature[M]{ANN}{Artificial Neural Network}
+\nomenclature[M]{CNN}{Convolutional Neural Network}
+\nomenclature[M]{DCNN}{Deep Convolutional Neural Network}
+\nomenclature[M]{SR}{Super Resolution}
+\nomenclature[M]{EDSR}{Enhanced Deep Super Resolution}
+\nomenclature[M]{VDSR}{Very Deep Super Resolution}
+\nomenclature[M]{FCN}{Fully Connected Network}
+\nomenclature[H]{RAM}{Random Access Memory}
+\nomenclature[H]{MSI}{Multispectral Instrument}
+\nomenclature[H]{MB/~GB}{ MegaByte/~GigaByte}
+\nomenclature[H]{GPS}{Global Positing Systems}
+\nomenclature[H]{GPU}{Graphics Processing Unit}
+\nomenclature[H]{TPU}{Tensor Processing Unit}
 
-\section{Data related}
-\textbf{OSM}:  Open Street Map \\
-\textbf{RGB}:  Red, Green, Blue \\
-\textbf{HR}:   High Resolution \\
 
-\section{Machine Learning related}
-\textbf{AI}:   Artificial Intelligence \\
-\textbf{ML}:   Machine Learning \\
-\textbf{PSNR}: Peak Signal to Noise Ratio \\
-\textbf{BP}:   Back Propagation \\
-\textbf{SVM}:  Support Vector Machine \\
-\textbf{ReLU}: Rectified Linear Unit \\
-\textbf{ANN}:  Artificial Neural Network \\
-\textbf{CNN}:  Convolutional Neural Network \\
-\textbf{DCNN}: Deep Convolutional Neural Network \\
-\textbf{SR}:   Super Resolution \\
-\textbf{EDSR}: Enhanced Deep Super Resolution \\
-\textbf{VDSR}: Very Deep Super Resolution \\
-\textbf{FCN}:  Fully Connected Network \\
+\printnomenclature
 
-\section{Hardware related}
-\textbf{RAM}:  Random Access Memory \\
-\textbf{MSI}:  Multispectral Instrument \\
-\textbf{MB~/~GB}:   MegaByte~/~GigaByte \\
-\textbf{GPS}:  Global Positing Systems \\ 
-\textbf{GPU}:  Graphics Processing Unit \\
-\textbf{TPU}:  Tensor Processing Unit \\
+% \chapter*{Nomenclature}\label{tab:nomenclature}
 
-\chapter{Abstract}\label{tab:abstract}
-The economy is moving towards automation. Roads are an essential factor in growth, development, and providing services. Though documented extensively in papers, the detection of small roads in mid-resolution satellites is still a problem. The work here sheds light on combining the low-level computer vision problem of super-resolution with the high-level computer vision problem of road-detection. We investigate the behavior when we first enhancing the image resolution before directly apply road-detection. We try to identify the small roads from a mid-resolution satellite image, which are otherwise skipped by the model prediction by combining the two different levels of computer vision problems.
+% \section*{Data related}
+% \textbf{OSM}:  Open Street Map \\
+% \textbf{RGB}:  Red, Green, Blue \\
+% \textbf{HR}:   High Resolution \\
 
-The model uses Convolutional Neural Networks supported by ResNet architecture. It also uses encoder-decoder and dilated convolutions to segment the image to identify roads and take the spatial context into account. The method described here allows us to improve the capability of any model to now detect finer roads.
+% \section*{Machine Learning related}
+% \textbf{AI}:   Artificial Intelligence \\
+% \textbf{ML}:   Machine Learning \\
+% \textbf{PSNR}: Peak Signal to Noise Ratio \\
+% \textbf{BP}:   Back Propagation \\
+% \textbf{SVM}:  Support Vector Machine \\
+% \textbf{ReLU}: Rectified Linear Unit \\
+% \textbf{ANN}:  Artificial Neural Network \\
+% \textbf{CNN}:  Convolutional Neural Network \\
+% \textbf{DCNN}: Deep Convolutional Neural Network \\
+% \textbf{SR}:   Super Resolution \\
+% \textbf{EDSR}: Enhanced Deep Super Resolution \\
+% \textbf{VDSR}: Very Deep Super Resolution \\
+% \textbf{FCN}:  Fully Connected Network \\
+
+% \section*{Hardware related}
+% \textbf{RAM}:  Random Access Memory \\
+% \textbf{MSI}:  Multispectral Instrument \\
+% \textbf{MB~/~GB}:   MegaByte~/~GigaByte \\
+% \textbf{GPS}:  Global Positing Systems \\ 
+% \textbf{GPU}:  Graphics Processing Unit \\
+% \textbf{TPU}:  Tensor Processing Unit \\
