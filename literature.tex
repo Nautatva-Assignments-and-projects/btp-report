@@ -22,7 +22,7 @@ The general structure of any convolutional neural network can be categorized as 
 
         Applying a filter to an image means taking the inner product of the image and the filter within the overlapping area, which keeps on moving. Suppose the dimension of an image is $W\times W$ and dimension of the filter is $k\times k$, the dimension of the output image will be $(W-k+1)\times (W-k+1)$. Once a filter has been applied, it passes through an activation function, and the resulting image is called the output of that filter.
     
-        The formula for convolutional neural network is: \begin{equation} a_{i,j} = f(\Sigma_{m=0}^2\Sigma_{n=0}^2 W_{m,n}X_{m+i,n+j}) \end{equation} where $\text{X}_{i, j}$ represents the pixel value of line $i$ in column $j$ of the image and $W_{m, n}$ represents the weight of column $n$in row $m$. Similarly, $a_{i,j}$ represents the value of column $j$ of the $i$ row of the feature map; the activation function is represented by $f$. (Example: \Cref{fig:convolution_filter_process}).
+        The formula for convolutional neural network is: \begin{equation} a_{i,j} = f(\sum_{m=0}^2\sum_{n=0}^2 W_{m,n}X_{m+i,n+j}) \end{equation} where $\text{X}_{i, j}$ represents the pixel value of line $i$ in column $j$ of the image and $W_{m, n}$ represents the weight of column $n$in row $m$. Similarly, $a_{i,j}$ represents the value of column $j$ of the $i$ row of the feature map; the activation function is represented by $f$. (Example: \Cref{fig:convolution_filter_process}).
         \begin{figure}[h!]
             \begin{subfigure}[b]{0.35\textwidth}
             \includegraphics[width=\textwidth]{cnn_filter_input}
@@ -62,9 +62,9 @@ The general structure of any convolutional neural network can be categorized as 
 \label{sec:Dilated_Convolution}
 \textit{Convolution with dilated filter; Also called atrous convolution}
 
-    Dilated convolutional layers are used in image segmentation, where its class labels each pixel. As the name suggests, dilated convolution is basically dilating the filter before doing the usual convolution. Dilating the filter means expanding, taking in distant elements instead of the adjacent elements in the input matrix to calculate weights. These filters are also called upsampled filters. The empty positions in between are filled with zeros, thus making this kind of sparse matrix. The distance in a dilated convolution filter is determined by the dilation coefficient D~(also called dilation rate). If the dilation rate is 1, it means it is the standard convolutional kernel. If the dilation rate is 2, then there is a skip of one pixel per input. In general, if there is a dilation rate of n, skip of n-1 pixels per input.
+    Dilated convolutional layers are used in image segmentation, where its class labels each pixel. As the name suggests, dilated convolution is basically dilating the filter before doing the usual convolution. Dilating the filter means expanding, taking in distant elements instead of the adjacent elements in the input matrix to calculate weights. These filters are also called upsampled filters. The empty positions in between are filled with zeros, thus making this kind of sparse matrix. The distance in a dilated convolution filter is determined by the dilation coefficient D~(also called dilation rate). If the dilation rate is 1, it means it is the standard convolutional kernel. If the dilation rate is 2, then there is a skip of one pixel per input. In general, if there is a dilation rate of $n$, skip of $n-1$ pixels per input.
     
-    \Cref{fig:dilated_layer} shows how the kernel elements are matched to input elements in a D-dilated 3x3 convolution. Also, notice how the dilated convolution layer has increased the spatial context~(a.k.a feature maps or receptive field or the field of view) without decreasing the resolution of the output.
+    \Cref{fig:dilated_layer} shows how the kernel elements are matched to input elements in a D-dilated $3\times3$ convolution. Also, notice how the dilated convolution layer has increased the spatial context~(a.k.a feature maps or receptive field or the field of view) without decreasing the resolution of the output.
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.5\textwidth]{cnn_dilated_layer}
@@ -76,10 +76,9 @@ The general structure of any convolutional neural network can be categorized as 
 \subsection{Strided convolution}
     In a regular convolution, we usually shift the windows by 1 pixel. However, for some large images, it is necessary to shrink feature maps to make computations feasible. In stride convolution, we change the length of stride in each step. This means we skip some input values while performing convolution operations and thus decreasing the output dimension. In general, this operation does a trad off between resource consumption and information retrieval.
 
-
 \section[Residual Networks]{Residual Networks}
 
-In a neural network, weights receive an update proportional to the gradient of current weight in each iteration. \begin{equation} ChangeInWeight_{i} \propto \frac{\partial(ErrorFunction)}{\partial(weight_{i})} \end{equation} When the gradient of the training model becomes vanishingly small, the change in weight becomes negligible, and thus model training essentially stops. This problem is called the problem of vanishing gradient.
+In a neural network, weights receive an update proportional to the gradient of current weight in each iteration. \begin{equation} \text{Change\ In\ Weight}_{i} \propto \frac{\partial(\text{Error\ Function)}}{\partial(\text{weight}_{i})} \end{equation} When the gradient of the training model becomes vanishingly small, the change in weight becomes negligible, and thus model training essentially stops. This problem is called the problem of vanishing gradient.
 
 Conventionally, as the CNNs become deeper, the problems related to vanishing gradients became severe. To solve this problem, {Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun}\cite{ResNet} developed the concept of residual networks(also called ResNet or skip connections). Residual neural networks tackle vanishing gradients by skipping connections or making shortcuts to jump over some layers (\cref{fig:residual_network}). Typical ResNet models are implemented with double- or triple- layer skips that contain nonlinearities (ReLU) and batch normalization in between.
 
