@@ -9,7 +9,7 @@ For understanding CNN, we need to see what an Artificial Neural Network~(ANN) is
 The general structure of any convolutional neural network can be categorized as follows:
 \begin{enumerate}[(a)]
     \item \textbf{Input layer}:
-        The input layer is the input of any neural network. The input of computer vision problems is usually an image that is basically a matrix of numbers stacked multiple times~(channels). An RGB image has 3 channels[\cref{fig:RGB_image}].
+        The input layer is the input of any neural network. The input of computer vision problems is usually an image that is basically a matrix of numbers stacked multiple times~(channels). An RGB image has 3 channels(\cref{fig:RGB_image}).
         \begin{figure}[h!]
             \centering
             \includegraphics[width=0.8\textwidth]{rgb_image_as_array}
@@ -22,7 +22,7 @@ The general structure of any convolutional neural network can be categorized as 
 
         Applying a filter to an image means taking the inner product of the image and the filter within the overlapping area, which keeps on moving. Suppose the dimension of an image is $W\times W$ and dimension of the filter is $k\times k$, the dimension of the output image will be $(W-k+1)\times (W-k+1)$. Once a filter has been applied, it passes through an activation function, and the resulting image is called the output of that filter.
     
-        The formula for convolutional neural network is: \begin{equation} a_{i,j} = f(\Sigma_{m=0}^2\Sigma_{n=0}^2 W_{m,n}X_{m+i,n+j}) \end{equation} where $\text{X}_{i, j}$ represents the pixel value of line $i$ in column $j$ of the image and $W_{m, n}$ represents the weight of column $n$in row $m$. Similarly, $a_{i,j}$ represents the value of column $j$ of the $i$ row of the feature map; the activation function is represented by $f$. [Example: \Cref{fig:convolution_filter_process}].
+        The formula for convolutional neural network is: \begin{equation} a_{i,j} = f(\Sigma_{m=0}^2\Sigma_{n=0}^2 W_{m,n}X_{m+i,n+j}) \end{equation} where $\text{X}_{i, j}$ represents the pixel value of line $i$ in column $j$ of the image and $W_{m, n}$ represents the weight of column $n$in row $m$. Similarly, $a_{i,j}$ represents the value of column $j$ of the $i$ row of the feature map; the activation function is represented by $f$. (Example: \Cref{fig:convolution_filter_process}).
         \begin{figure}[h!]
             \begin{subfigure}[b]{0.35\textwidth}
             \includegraphics[width=\textwidth]{cnn_filter_input}
@@ -47,7 +47,7 @@ The general structure of any convolutional neural network can be categorized as 
         Each filter in the convolution layer uses the output of the previous layer to connect and calculate. The number of filters is predefined and usually kept in powers of 2. Suppose a layer has 64 filters of dimension $3\times3$, the input image has dimensions of $1000\times1000$, the resulting output will be of dimension $998\times998\times64$. If this is passed into another layer consisting of 128 filters and the same dimension, the new output will be $996\times996\times128$.
 
     \item \textbf{Pooling layer}:
-        The amount of data after the multilayer convolution layer is huge. To reduce the time taken for calculations, we need to reduce the size of the matrix. This means we need to reduce the number of parameters of the fully-connected layer. This is done by using a pooling layer. The pooling layer finds the eigenvalues of the image, which are then used as the basis of classification. The pooling layer also prevents data from overfitting.
+        The amount of data after the multilayer convolution layer is huge. To reduce the time taken for calculations, we need to reduce the size of the matrix. This means we need to reduce the number of parameters of the fully-connected layer. This is done by using a pooling layer. The pooling layer finds the image's eigenvalues, which are then used as the basis of classification. The pooling layer also prevents data from overfitting.
 
         The pooled layer function similar to data resampling. The filter propagates in the same way as the filters in the convolution layer. The difference between the two is that instead of taking the inner product with the filter, we take the maximum or average value of the window. The most used pooling methods are max pooling, mean pooling, and random pooling layers. In a max-pooling layer, the maximum value of a pre-specified window replaces the given dataset. If the dataset is replaced by averaging the contents in the window, it is called an average pooling layer. A number is selected randomly according to the probability matrix in random pooling.
 
@@ -64,7 +64,7 @@ The general structure of any convolutional neural network can be categorized as 
 
     Dilated convolutional layers are used in image segmentation, where its class labels each pixel. As the name suggests, dilated convolution is basically dilating the filter before doing the usual convolution. Dilating the filter means expanding, taking in distant elements instead of the adjacent elements in the input matrix to calculate weights. These filters are also called upsampled filters. The empty positions in between are filled with zeros, thus making this kind of sparse matrix. The distance in a dilated convolution filter is determined by the dilation coefficient D~(also called dilation rate). If the dilation rate is 1, it means it is the standard convolutional kernel. If the dilation rate is 2, then there is a skip of one pixel per input. In general, if there is a dilation rate of n, skip of n-1 pixels per input.
     
-    \Cref{fig:dilated_layer} shows how the kernel elements are matched to input elements in a D-dilated 3x3 convolution. Also notice how the dilated convolution layer has increased the spatial context~(a.k.a feature maps or receptive field or the field of view) without decreasing the resolution of output.
+    \Cref{fig:dilated_layer} shows how the kernel elements are matched to input elements in a D-dilated 3x3 convolution. Also, notice how the dilated convolution layer has increased the spatial context~(a.k.a feature maps or receptive field or the field of view) without decreasing the resolution of the output.
     \begin{figure}[h!]
         \centering
         \includegraphics[width=0.5\textwidth]{cnn_dilated_layer}
@@ -85,7 +85,7 @@ Conventionally, as the CNNs become deeper, the problems related to vanishing gra
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.2\textwidth]{lit_resnet}
+    \includegraphics[width=0.3\textwidth]{lit_resnet}
     \caption[A residual network]{Canonical form of a residual neural network. Layer-2 is skipped over activation from Layer-1.}
     \label{fig:residual_network}
 \end{figure}
@@ -99,52 +99,4 @@ The encoder-decoder architecture is the standard neural machine translation meth
 
 Though this architecture is very new, having only been pioneered in 2014. The encoder-decoder architecture has become a modern approach for sequence-to-sequence (seq2seq) predictions. Road detection needs a sequence-to-sequence learning framework to keep track of spatial characteristics. It has three components: an encoder network, a decoder network, and an intermediate network.
 
-The encoders are trained with the decoders. There are no labels (hence unsupervised). The loss function is based on computing the delta between the actual and reconstructed input. The optimizer will try to train both encoder and decoder in such a way that the features that matter the most should have lower reconstruction loss. This also means that, given an encoded sequence, we do not try to reconstruct the actual input, but rather try to map inputs to specific outputs. For example, given a map, it maps roads to true and assigns everything else to false. This is how a lossy compression algorithm helps us in the segmentation of an image.
-
-% \section{Super Resolution}
-
-
-% \section{Road Detection}
-% It can be both binary and fuzzy
-
-% \section{Training process of convolutional neural network}
-
-% In this paper, the road extraction of remote sensing image is studied. Firstly, the convolutional neural network is used to classify the high-resolution remote sensing image, distinguish the road from the non-road, and extract the road information initially. Secondly, the convolutional neural network is optimized and improved from the training algorithm. In this section, the training process of convolutional neural network is improved to realize road classification in remote sensing images.
-
-% Gradient descent algorithm is simple, easy to converge, but easy to fall into the local optimal solution, and the gradient descent near the saddle point is slow, affecting the training of network model. The saddle point can be avoided in the training process of Newton algorithm, but the method needs to compute Heisen matrix to ensure its non-negative positive definite and a large amount of storage space and to ensure the existence of second-order derivatives of the objective function; otherwise, it is difficult to ensure the convergence of the algorithm [26,27,28]. In order to avoid the difficulties caused by the direct use of the Newton algorithm, the improved BFGS quasi-Newton algorithm [29] is used to train convolutional neural networks.
-
-% In the Newton algorithm training process, the CNN model parameters are updated to:
-% 𝑊𝑖+1=𝑊𝑖−∇𝑗𝑤∇2𝑗𝑤
-% (9)
-
-% The initial quasi-Newton algorithm equation is:
-% 𝐵𝑘+1𝑆𝑘=𝑦𝑘
-% (10)
-
-% where Sk = Wk + 1 − Wk, yk =  ∇ jw + 1 −  ∇ jw. In order to achieve better target optimization effect, the improved BFGS is used in this paper.
-% 𝐻𝑘+1=𝐻𝑘+𝑦𝑘𝑦𝑡𝑘𝑦𝑡𝑘𝑠𝑘−𝐻𝑘𝑠𝑘𝑠𝑡𝑘𝐻𝑘𝑠𝑡𝑘𝐻𝑘𝑠𝑘
-% (11)
-
-% However, the Heisen matrix obtained by the recursion formula may be a singular matrix, and the inverse matrix calculation has a certain degree of complexity, so the recursion formula in this paper is expressed as follows:
-% 𝐵−1𝑘+1=(𝐵0−𝑠𝑘𝑦𝑇𝑘𝑠𝑇𝑘𝑦𝑘)𝐵−1𝑘(𝐵0−𝑦𝑘𝑠𝑇𝑘𝑠𝑇𝑘𝑦𝑘)+𝑠𝑘𝑠𝑇𝑘𝑠𝑇𝑘𝑦𝑘
-% (12)
-
-% Based on the above theory and formula, the training process of the improved BFGS algorithm is as follows:
-
-%     1.
-
-%     Select iteration times epochs, epoch = 0, initialization parameter w and offset b.
-%     2.
-
-%     If epoch < epochs, iteration stops.
-%     3.
-
-%     Calculate the value of bkdk +  ∇ jw = 0 and get a new optimization direction 𝑑𝑘=−𝐵−1𝑘𝑔𝑘
-
-%     .
-%     4.
-
-%     Search along the dk direction to satisfy wk + 1 = wk + akdk, it is the minimum point in this direction, ak > 0.
-%     5.
-
-%     Let the epoch iteration add 1 and go to (2).
+The encoders are trained with the decoders. There are no labels (hence unsupervised). The loss function is based on computing the delta between the actual and reconstructed input. The optimizer will try to train both encoder and decoder so that the features that matter the most should have lower reconstruction loss. This also means that, given an encoded sequence, we do not try to reconstruct the actual input, but rather try to map inputs to specific outputs. For example, given a map, it maps roads to true and assigns everything else to false. This is how a lossy compression algorithm helps us in the segmentation of an image.

@@ -27,8 +27,7 @@ The model predicted most of the roads, which were predicted by the model without
 \section{Cons}
 One of the most noticeable drawbacks of using this model is the amount of time required to get the predictions. 
 
-Another disadvantage is, the model is too much affected due to inaccuracies in the training dataset. If the road gets too thick, say, we take an image with a higher resolution, and run the model; we see that our model has several discontinuities in between. Refer [\cref{fig:cons_coverleaf}]. 
-This is mainly because of the noise which has effected the weights. This error can be reduced by training the model with more precise data. Another way to correct this error is to run the algorithm without super-resolution. This means we need to train the model again, this time without super-resolution.
+Another disadvantage is, the model is too much affected due to inaccuracies in the training dataset. If the road gets too thick, say, we take an image with a higher resolution, and run the model; we see that our model has several discontinuities in between. Refer (\cref{fig:cons_coverleaf}). This is mainly because of the noise which has effected the weights. This error can be reduced by training the model with more precise data. Another way to correct this error is to run the algorithm without super-resolution. This means we need to train the model again, this time without super-resolution.
 
 \begin{figure}[h!]
   \centering

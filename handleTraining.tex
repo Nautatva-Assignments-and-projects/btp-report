@@ -20,11 +20,11 @@ Even after obtaining the satellite image and road dataset for the same geographi
 \section{Cleaning the obtained dataset}
 Though the data is from OSM by multiple collaborators, it is more or less in a raw format and prone to errors. Given its open-source in nature, it may be outdated or, in some cases, need some corrections. These corrections need to be manually done to ensure the training data is accurate before being fed into our model.
 
-The images with less or no roads are removed from the dataset. This is so that `the no road` data should not affect the weights used to identify roads. This step is significant because roads often make up a tiny part of satellite images, and most training images will have no roads on them.
+The images with less or no roads are removed from the dataset. This is done so that `the no road` data should not affect the weights used to identify roads. This step is significant because roads often make up a tiny part of satellite images, and most training images will have no roads on them.
 
 
 \section{Handling the noise generated to improve training}
-Now that the models are chosen, we will now try to link the output of the super-resolution model to the input of road-detector. As specified earlier, our road-detection model assumes the training and input dataset ideally is a pixel-level accurate map. This is a problem as no super-resolution model can be 100 percent accurate. Thus, this underlying condition needs to be handled to reduce false predictions in the model.
+Now that the models are chosen, we will now try to link the output of the super-resolution model to the input of road-detector. As specified earlier, our road-detection model assumes the training and input dataset ideally is a pixel-level accurate map. No super-resolution model can be 100 percent accurate, and this becomes the cause of the problem. Thus, this underlying condition needs to be handled to reduce false predictions in the model.
 
 The datasets constructed from a map suffers from two types of labeled noises (\cref{fig:noise_types}):
 \begin{itemize}
@@ -47,4 +47,4 @@ The datasets constructed from a map suffers from two types of labeled noises (\c
   \label{fig:noise_types}
 \end{figure}
 
-These kinds of errors in the training labels reduce the accuracy of classifiers trained with this data. To solve this we use a proper loss function during training for our road-detection model.
+These kinds of errors in the training labels reduce the accuracy of classifiers trained with this data. To solve this, we use a proper loss function during training for our road-detection model.
