@@ -47,7 +47,6 @@ Another disadvantage is, the model is too much affected due to inaccuracies in t
   \label{fig:cons_coverleaf}
 \end{figure}
 
-
 Now that we have two predictions, one with super-resolution and without it, we merge them. First, we need to make them of the same resolutions. We do this by finding out the difference factor. Let us say the difference factor is $X$ on each side; we split the lower resolution image pixels into $X$ different pixels on both sides. Then we average the resultant images of the same resolution. For reference: look at \cref{fig:roads_in_confidence}
 
 \begin{figure}[h!]
@@ -79,6 +78,11 @@ Now that we have two predictions, one with super-resolution and without it, we m
 \end{sidewaysfigure}
 
 % \chapter{Conclusions}
-% \chapter{Scope of Improvements}
+\chapter{Scope of Improvements}
+
+Thanks to \href{https://arxiv.org/pdf/1805.06561.pdf}{DeepGlobe 2018: A Challenge to Parse the Earth through Satellite Images} and \href{http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w4/Zhou_D-LinkNet_LinkNet_With_CVPR_2018_paper.pdf}{Submissions for the DeepGlobe Road Extraction Challenge}, I could test the hypothesis that indeed super-resolution can improve the results drastically!
+
+We see that super-resolution and road-detection both use Deep Convolution Neural Network. The entire network is trained, which gives good results. Now that the hypothesis that merging SR improves road-detection results is proven to be correct, the next step is making a single model that will detect roads instead of relying on two different models.
+
 % https://towardsdatascience.com/road-segmentation-727fb41c51af
 \pagebreak

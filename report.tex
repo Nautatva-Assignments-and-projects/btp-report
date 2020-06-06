@@ -40,6 +40,23 @@
    detect-inline-family=math,
 }
 
+\usepackage[intoc]{nomencl}
+\makenomenclature
+\usepackage{etoolbox}
+\BeforeBeginEnvironment{minted}{\begin{tcolorbox}}
+\AfterEndEnvironment{minted}{\end{tcolorbox}}
+\renewcommand\nomgroup[1]{
+	\item[\bfseries
+	\ifstrequal{#1}{D}{Data Related}{
+		\ifstrequal{#1}{M}{Machine Learning Related}{
+			\ifstrequal{#1}{H}{Hardware Related}{}}}
+  ]}
+
+\usepackage{minted}
+\setminted{breaklines=true}
+\usepackage{tcolorbox}
+
+% \usepackage{pythonhighlight}
 \usepackage{mathptmx}
 
 
@@ -131,8 +148,6 @@
 %%%%% Adds the title page
 \include{titlepage}
 
-
-
 \pagenumbering{roman}
 
 % \clearpage
@@ -142,8 +157,8 @@
 % \begin{center}{\large \textit{This page has been intentionally left blank}}\end{center}
 % \vfill
 
-% \newpage
-% \include{abstract}
+\newpage
+\include{abstract}
 
 % \clearpage
 % \thispagestyle{empty}
@@ -182,8 +197,8 @@
 \addcontentsline{toc}{chapter}{\numberline{}List of Tables}
 
 \clearpage
-%\includepdf[pages={10}, pagecommand={}]{external.pdf}
-%\include{nomenclature}
+% \includepdf[pages={10}, pagecommand={}]{external.pdf}
+\include{nomenclature}
 
 \pagenumbering{arabic}
 
@@ -194,7 +209,7 @@
 % TODO: maitain consistency for super-resolution and road-detection. See caps and smalls too!
 % TODO: How to add Nomenclature. Do I need it for aliases?
 % TODO: Checkout capitalisation for references, eg: table, figure, chapter 4.xx
-\include{nomenclature}
+
 \include{intro}
 \include{problemBackground}
 \include{previousWork}
