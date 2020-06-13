@@ -1,6 +1,8 @@
 \chapter{Literature review}\label{chapt:lit}
-\section{Convolutional Neural Networks~(CNN)}
-\textit{A CNN is a type of Artificial Neural Network~(ANN) where convolutional blocks are used instead of basic 1-D multilayer perceptrons.}
+The idea of using satellite data has been researched in many communities. Several automated and semi-automated ways are proposed to tackle the problem of detecting roads. These ways are quite different due to the different strategies and algorithms used by them. \Cref{sec:cnn,sec:resNet,sec:encoderDecoder} documents the various techniques used in this report. \Cref{sec:roadDetection,sec:sr} paves a path on how did the automation of road-extraction come into existence.
+
+\section{Convolutional Neural Networks~(CNN)}\label{sec:cnn}
+`\textit{A CNN is a type of Artificial Neural Network~(ANN) where convolutional blocks are used instead of basic 1-D multilayer perceptrons.}'
 
 For understanding CNN, we need to see what an Artificial Neural Network~(ANN) is. ANN is a system of interconnected neurons used to model complex functions for classification and regression. Any model is made up of at least three layers: An input layer, one or more hidden layers, and an output layer. The most basic ANN model consists of multilayer perceptrons. \Cref{subsection:types_of_layers} shows different types of layers that can be used for a convolutional neural network. Several non-linear activation functions such as rectified linear unit (ReLU)or sigmoid, or even custom functions can be applied at any point on the layers to produce activation maps. These activation maps finally help us in classification or segmentation.
 
@@ -76,7 +78,7 @@ The general structure of any convolutional neural network can be categorized as 
 \subsection{Strided convolution}
     In a regular convolution, we usually shift the windows by 1 pixel. However, for some large images, it is necessary to shrink feature maps to make computations feasible. In stride convolution, we change the length of stride in each step. This means we skip some input values while performing convolution operations and thus decreasing the output dimension. In general, this operation does a trad off between resource consumption and information retrieval.
 
-\section[Residual Networks]{Residual Networks}
+\section[Residual Networks]{Residual Networks}\label{sec:resNet}
 
 In a neural network, weights receive an update proportional to the gradient of current weight in each iteration. \begin{equation} \text{Change\ In\ Weight}_{i} \propto \frac{\partial(\text{Error\ Function)}}{\partial(\text{weight}_{i})} \end{equation} When the gradient of the training model becomes vanishingly small, the change in weight becomes negligible, and thus model training essentially stops. This problem is called the problem of vanishing gradient.
 
@@ -93,9 +95,42 @@ While training, an additional matrix can be used to train the skip connections a
 
 Many improvements to the original ResNet architecture have been made since its inception. Pre-trained models like ResNet (34, 50, 101) are already available in popular libraries like Tensorflow and PyTorch. ResNet is considered one of the most significant innovations in the area of neural networks.
 
-\section{Encoder-Decoder}
+\section{Encoder-Decoder}\label{sec:encoderDecoder}
 The encoder-decoder architecture is the standard neural machine translation method that rivals and, in some cases, outperforms classical statistical machine translation methods.
 
 Though this architecture is very new, having only been pioneered in 2014. The encoder-decoder architecture has become a modern approach for sequence-to-sequence (seq2seq) predictions. Road detection needs a sequence-to-sequence learning framework to keep track of spatial characteristics. It has three components: an encoder network, a decoder network, and an intermediate network.
 
 The encoders are trained with the decoders. There are no labels (hence unsupervised). The loss function is based on computing the delta between the actual and reconstructed input. The optimizer will try to train both encoder and decoder so that the features that matter the most should have lower reconstruction loss. This also means that, given an encoded sequence, we do not try to reconstruct the actual input, but rather try to map inputs to specific outputs. For example, given a map, it maps roads to true and assigns everything else to false. This is how a lossy compression algorithm helps us in the segmentation of an image.
+
+\section{Road detection}\label{sec:roadDetection}
+The journey to digitally identify the roads started with the topic of reducing cost and increasing productivity. One of the first road detection algorithms were static methods and focused on the color and geometry of roads. These methods were quite unreliable, mainly because of the discontinuities arising due to the similar color range of roads and shadows~\cite{Detecting_interections_using_color,Detecting_roads_using_color}. Another disadvantage was the need for high-resolution images (ca 0.2~m~-~0.5~m), which is hard to get. The idea was then improvised to include texture cues for road detection~\cite{using_texture_for_road_detection,baumgartner1999automatic}. The accuracy was indeed better, but the need for a very high-resolution image remained a problem. With the machine learning techniques, the pixel-level classification started to give improved performance~\cite{road_detection_using_neural_nets_SVM,road_detection_using_env_learning,road_detection_using_SVM_online_learning}.
+
+The Support Vector Machine~(SVM) methods have a good generalization ability and thus are widely used in object detection from a given image. They are, at most times, more accurate and give consistent robust results than other classification techniques such as K-nearest neighbor. Nevertheless, the estimation of kernel functions and the choice of the dimensional space and training samples led to the SVM classifier~\cite{YagerSowmya2003,melgani2004classification}. This was done using edge-based features such as gradient, intensity, edge length, and classified objects in a high-resolution image. SVM approaches are well suited for multispectral data, where we have an adequate number of vectors to classify objects~\cite{Simler2011}.
+
+In 2003, Tu-Ko presented a robust approach, in which a back-propagation~(BP) neural network was trained with the spectral and edge information to find the road centerline. Although errors prop in, the model was still useful as a whole. Disadvantages of BP neural network include slow convergence speed, the need for an extensive training data set, inability to find global minima, and over-fitting risks. Since then, many types of neural networks like fuzzy neural networks~\cite{mokhtarzade2008automatic} and Convolutional Neural Networks~(CNN) have been used to capture the spacial contexts of road networks, giving much better accuracies on fewer resources.
+
+With the developments of Graphics Processing Units~(GPUs) and Tensor Processing Units~(TPUs) and the progress of ResNet architectures, even Deep Convolutional Neural Networks~(DCNN) have been researched and changed the way road extraction works. The recent developments with encoder-decoders, dilations, and fuzzy logic have inspired state-of-the-art algorithms like UNet, SegNet, LinkNet, and its further improvements like D-LinkNet and AD-LinkNet~(\cref{fig:compare_road}). Moreover, competitions pitch in the researchers by providing them with a precise dataset and motivating them to thrive and excel in the world race.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{compare_road}
+  \caption[Comparison of different road-detection models]{Comparison of different road-detection models. Adapted from~\cite{AD-LinkNet}.}
+  \label{fig:compare_road}
+\end{figure}
+
+
+\section{Super Resolution~(SR)}\label{sec:sr}
+Many models have proposed methods to obtain a super-resolution image from the given image. Most of the techniques use bicubic upsampling of the image as an input to the proposed neural network model. However, this was inefficient as a significant part of memory is required for performing bicubic upsampling. The authors of~\cite{EDSR} additionally questioned the architectural optimality used in the existing networks. Though neural networks provide significantly improved performance in terms of peak signal-to-noise ratio (PSNR) in the SR problem, it is also proven to be quite sensitive to minor architectural changes. The outputs differ in performance with different training techniques. The authors further proposed an enhanced deep super-resolution network (EDSR) with performance exceeding the past state-of-the-art super-resolution models. This was achieved by carefully designing model architecture using sophisticated optimization methods in training the neural networks.
+
+Secondly, the authors noticed that most existing models treat the super-resolution of different scale factors as an independent problem. There is no consideration of learning the mutual relationship between different scales. With efforts such as the development of Very Deep Super Resolution~(VSDR), this relationship is proved to be feasible and much more accurate than the single-scale models, though at the cost of heavier computation time and memory utilization. Further work was restricted by a lack of ability to use very deep neural networks.
+
+With the break-through changes brought by concepts of skip-connects and residual blocks, neural networks were shown to be trained with 100+ layers. SRNet solved incorporated the ResNet architecture and solved the problem of high memory utilization. Because ResNet architecture was proposed to solve higher-level computer vision problems such as image classification and detection, its use directly for a low-level problem like computer vision can be optimized.
+
+EDSR proposes using a modified type of residual block to remove the unnecessary elements and optimize the model's performance. Secondly, a new architecture is used with fewer parameters but showing comparable performance. \Cref{fig:compare_SR} shows a comparison between different SR algorithms.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{compare_SR}
+  \caption[Comparison of different super-resolution models]{Comparison of different super-resolution models. HR is raw high resolution image taken. Adapted from~\cite{EDSR}.}
+  \label{fig:compare_SR}
+\end{figure}

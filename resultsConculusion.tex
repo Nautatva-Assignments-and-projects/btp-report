@@ -27,25 +27,7 @@ The model predicted most of the roads, which were predicted by the model without
 \section{Cons}
 One of the most noticeable drawbacks of using this model is the amount of time required to get the predictions. 
 
-Another disadvantage is, the model is too much affected due to inaccuracies in the training dataset. If the road gets too thick, say, we take an image with a higher resolution, and run the model; we see that our model has several discontinuities in between. Refer (\cref{fig:cons_coverleaf}). This is mainly because of the noise which has effected the weights. This error can be reduced by training the model with more precise data. Another way to correct this error is to run the algorithm without super-resolution. This means we need to train the model again, this time without super-resolution.
-
-\begin{figure}[h!]
-  \centering
-  \begin{subfigure}{0.3\textwidth}
-    \includegraphics[width=\textwidth]{cons_coverleaf}
-    \caption{}
-  \end{subfigure}~
-  \begin{subfigure}{0.3\textwidth}
-    \includegraphics[width=\textwidth]{cons_road_coverleaf}
-    \caption{}
-  \end{subfigure}~
-  \begin{subfigure}{0.3\textwidth}
-    \includegraphics[width=\textwidth]{cons_road_coverleaf_sr}
-    \caption{}
-  \end{subfigure}
-  \caption[Problem in predictions large roads]{\textbf{(a)} The image to apply the model on. \textbf{(b)} Road detection without applying super-resolution. \textbf{(c)} Road detection by out model. When a wide road is to be predicted, the noise takes over and our predictions go horribly wrong.}
-  \label{fig:cons_coverleaf}
-\end{figure}
+Another disadvantage is, the model is too much affected due to inaccuracies in the training dataset. This is particularly visible for wide roads, say, an 8~lane road, on a 10~m resolution. As seen in \cref{fig:run_merge_road_maps}, the thick roads (the ones predicted in \textbf{(b)}) are seen to be lacking certain amount of continuity. The discontinuity is mainly because of the noise, which has affected the weights. This error can be reduced by training the model with more precise data. As obtaining precise data is an expensive operation, another way to correct this error to a certain extent is to run the algorithm without super-resolution and to average the results with appropriate weightage given to both road-detection `With super-resolution' and `Without super-resolution.'
 
 Now that we have two predictions, one with super-resolution and without it, we merge them. First, we need to make them of the same resolutions. We do this by finding out the difference factor. Let us say the difference factor is $X$ on each side; we split the lower resolution image pixels into $X$ different pixels on both sides. Then we average the resultant images of the same resolution. For reference: look at \cref{fig:roads_in_confidence}.
 
@@ -68,6 +50,26 @@ Now that we have two predictions, one with super-resolution and without it, we m
   \end{subfigure}
   \caption[Finding likelihood of roads in predictions]{Merging roads found with \textbf{(a)} Predictions with SR. \textbf{(b)} Predictions without SR. \textbf{(c)} Upscaling of (b). \textbf{(d)} Final result by averaging (a) and (c). Black ones are definitely a road, grey ones having 0.5 probablity of being a road and least likely to find a road on the white pixel.}
   \label{fig:roads_in_confidence}
+\end{figure}
+
+\textbf{Note:} The model described in this complete report is strictly for mid-resolution satellite data. If the method is applied to macro images (such as an on-ground camera or an aerial image), the consequences can be disastrous. For example, look at (\cref{fig:cons_coverleaf}) where we used aerial image and applied our model.
+
+\begin{figure}[h!]
+  \centering
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{cons_coverleaf}
+    \caption{}
+  \end{subfigure}~
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{cons_road_coverleaf}
+    \caption{}
+  \end{subfigure}~
+  \begin{subfigure}{0.3\textwidth}
+    \includegraphics[width=\textwidth]{cons_road_coverleaf_sr}
+    \caption{}
+  \end{subfigure}
+  \caption[Disastors in applying the model on unexpected images]{\textbf{(a)} The image to apply the model on. \textbf{(b)} Road detection without applying super-resolution. \textbf{(c)} Road detection by out model. Notice how the accuracy drops when we apply the model on an aerial image.}
+  \label{fig:cons_coverleaf}
 \end{figure}
 
 \begin{sidewaysfigure}

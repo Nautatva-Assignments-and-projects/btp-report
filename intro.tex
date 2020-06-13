@@ -6,7 +6,7 @@ Historically, roads were mapped manually using approximate measures, mostly for 
 
 However, most of the roads in the early days were mapped using manual techniques. Taking GPS enabled devices to mark roads is both inefficient and costly. Also, some roads are inaccessible due to various factors. To combat the individual mapping of roads, some open crowdsourcing platforms like \href{https://www.openstreetmap.org/}{OpenStreetMap~(OSM)}  help people continue researching by using their data. This successfully reduced the redundant work, but there is no way to check if the data is correct. Almost always, human errors reduce the quality of data. Millions of kilometers of roads are still left to be digitised to be used for any activity~\cite{MapsDoneOSM}. As previous road data might have changed, completing the mapping of the remaining roads still does not guarantee us the latest report.
 
-The computer is one piece of technology which makes our work a lot simpler. With the advent of techniques such as Machine Learning, identifying patterns to solve certain kinds of problems has become a lot easier. This work is an attempt to use image segmentation based on computer vision techniques to detect roads in satellite images. This will help us in reducing the manual workforce to a large extent. While road detection has been extensively documented in research papers, these papers mostly focus on identifying roads while the camera is on the road. While this has it's own uses in navigation, but using these techniques for surveying is not feasible as one will have to drive all the way, resulting in highly inefficient surveying. Some papers have tried to overcome this problem by high-resolution satellite images, but high-resolution images are quite expensive and have to be bought commercially. Another widespread problem these satellite images face is radiometric distortion. Roads of asphalt, sometimes turn from dark grey into bright white due to some reflection affecting satellite sensors. This is seen clearly is \cref{fig:sat_img_radiometric_distortion}~\cite{GF2-imageCaseStudy}.
+The computer is one piece of technology which makes our work a lot simpler. With the advent of techniques such as Machine Learning, identifying patterns to solve certain kinds of problems has become a lot easier. This work is an attempt to use image segmentation based on computer vision techniques to detect roads in satellite images. This will help us in reducing the manual workforce to a large extent. While road detection has been extensively documented in research papers, these papers mostly focus on identifying roads while the camera is on the road. While this has it's own uses in navigation, but using these techniques for surveying is not feasible as one will have to drive all the way, resulting in highly inefficient surveying. Some papers have tried to overcome this problem by high-resolution satellite images, but high-resolution images are quite expensive and have to be bought commercially. Another widespread problem these satellite images face is radiometric distortion. Roads of asphalt, sometimes turn from dark grey into bright white due to some reflection affecting satellite sensors. This is seen clearly is \cref{fig:sat_img_radiometric_distortion}~\cite{GF2-imageCaseStudy}. 
 
 \begin{figure}[h!]
   \centering
@@ -22,4 +22,42 @@ The computer is one piece of technology which makes our work a lot simpler. With
   \label{fig:sat_img_radiometric_distortion}
 \end{figure}
 
-Road detection using satellite data is already tough due to the many discontinuities arising given large tree canopies or due to roads being overshadowed by buildings. Road detection using a mid-resolution satellite is tougher, given the resolution is usually around 1~m-10~m. A typical two-lane road has a width of around 7~m, and this width in the best case is just depicted by just 7 pixels, leave out the worst case where a pixel hardly shows a road. This work is an effort to use the image segmentation techniques into the area of remote sensing to detect roads in mid-resolution satellite images.
+Mid-resolution satellite images can be used for large scale surveys to tackle distrotion as well as reduce the cost, but the identification of roads on mid-resolution~(>~5~m) satellite data is difficult and often has low accuracy. A typical two-lane road has a width of around 7~m, and this road will have a width of hardly a pixel in our satellite image. This work is an effort to use the image segmentation techniques into the area of remote sensing to detect roads in mid-resolution satellite images.
+
+We will be using RGB images from satellite \href{https://sentinel.esa.int/web/sentinel/missions/sentinel-2}{Sentinel-2A}. \Cref{tab:sentinel-resolution} lists the detailed parameters of the satellite. Band 2 (Blue), 3 (Green), and 4 (Red) are stacked together to get a 3-channel RGB image. As seen in the specifications, the spacial resolution of the final image is 10~m. The task is to increase the accuracy of the existing road-detection algorithm.
+
+\begin{table}[h!]
+  \centering
+  \begin{tabular}{ |c|c|c| }
+    \hline
+    Spatial resolution~(m) & Band number & Central wavelength~(nm) \\
+    \hline
+    10&2&492.4 \\
+    10&3&559.8 \\
+    10&4&664.6 \\
+    10&8&832.8 \\
+    20&5&704.1 \\
+    20&6&740.5 \\
+    20&7&782.8 \\
+    20&8a&864.7 \\
+    20&11&1613.7 \\
+    20&12&2202.4 \\
+    60&1&442.7 \\
+    60&9&945.1 \\
+    60&10&1373.5 \\
+    \hline
+  \end{tabular}
+  \caption[Wavelengths and bandwidths of the three spatial resolutions of the MSI instruments]{Wavelengths and bandwidths of the three spatial resolutions of the MSI instruments~\cite{sentinelSpecifications}.}
+  \label{tab:sentinel-resolution}
+\end{table}
+
+By combining the three bands from the raw satellite image, the resulting image size is of the order of 400~MB for one mid-sized city. At first, this may not seem significant in comparison with some of the media files. Yet, handling files of this size in DCNN is a severe issue. Processing large files might be possible for massive supercomputers; however a general workstation has Random Access Memory~(RAM) anywhere from 128 to 256~GBs of RAM, while personal computers range from 8~GB to 32~GBs of RAM. Thus, this image must be divided into several parts so that our algorithms work on a readily available device.
+
+Our input image does not have a sufficiently high resolution to identify small roads. To deal with this problem of pixelization, we will be using two types of models. This setup is shown in \cref{fig:model_complete_without_labels}. Unless specifically mentioned, a model means a combined setup using super-resolution and road-detection models. Data from the input layer goes to the super-resolution model, which is consequently passed to the road-detection model. The final output consists of the predicted road network in the image.
+
+\begin{figure}[h!]
+  \centering
+  \includegraphics[width=\textwidth]{model_complete_without_labels}
+  \caption{Complete setup: Combination of super-resolution and road-detection models.}
+  \label{fig:model_complete_without_labels}
+\end{figure}
