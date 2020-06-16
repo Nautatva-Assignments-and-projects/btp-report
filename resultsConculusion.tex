@@ -2,7 +2,7 @@
 
 With so much to talk in this report, everything can be summarised into a small picture - \cref{fig:the_complete_picture}.
 
-\section{Pros}
+% \section{Pros}
 The model predicted most of the roads, which were predicted by the model without super-resolution. Apart from that, the model also predicted a lot of other small roads. On validating with the ground truth images, I found that this was a very good prediction. Checkout \cref{fig:run_merge_road_maps}.
 
 \begin{figure}[h!]
@@ -24,8 +24,8 @@ The model predicted most of the roads, which were predicted by the model without
 \end{figure}
 
 
-\section{Cons}
-One of the most noticeable drawbacks of using this model is the amount of time required to get the predictions. 
+% \section{Cons}
+Though the prediction is a significant improvement, One of the most noticeable drawbacks of using this model is the amount of time required to get the predictions. 
 
 Another disadvantage is, the model is too much affected due to inaccuracies in the training dataset. This is particularly visible for wide roads, say, an 8~lane road, on a 10~m resolution. As seen in \cref{fig:run_merge_road_maps}, the thick roads (the ones predicted in \textbf{(b)}) are seen to be lacking certain amount of continuity. The discontinuity is mainly because of the noise, which has affected the weights. This error can be reduced by training the model with more precise data. As obtaining precise data is an expensive operation, another way to correct this error to a certain extent is to run the algorithm without super-resolution and to average the results with appropriate weightage given to both road-detection `With super-resolution' and `Without super-resolution.'
 
@@ -80,11 +80,13 @@ Now that we have two predictions, one with super-resolution and without it, we m
 \end{sidewaysfigure}
 
 % \chapter{Conclusions}
-\chapter{Scope of Improvements}
+\chapter{Conclusions and Scope of Improvements}
 
 Thanks to \href{https://arxiv.org/pdf/1805.06561.pdf}{DeepGlobe 2018: A Challenge to Parse the Earth through Satellite Images} and \href{http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w4/Zhou_D-LinkNet_LinkNet_With_CVPR_2018_paper.pdf}{Submissions for the DeepGlobe Road Extraction Challenge}, I could test the hypothesis that indeed super-resolution can improve the results drastically.
 
-We see that super-resolution and road-detection both use Deep Convolution Neural Network. The entire network is trained, which gives good results. Now that the hypothesis that merging SR improves road-detection results is proven to be correct, the next step is making a single model that will detect roads instead of relying on two different models.
+In this process, we see that the narrow roads that were not recognized by the road-detection model are now visible in the predictions at the cost of the spacial connectivity of broad roads. Another significant observation is that the model is applied on broad roads. This is because the noise generated during super-resolution becomes much more dominant in monotonic features.
+
+We see that super-resolution and road-detection both use Deep Convolution Neural Network. We train both the models separately and use them one after the other, to find significantly better results than any existing models. Now that the hypothesis that merging SR improves road-detection results is proven to be correct, the next step is making a single model that will detect roads instead of relying on two different models. This is logically feasible because both the models are DCNN, and another DCNN should replicate the behavior in a single model.
 
 % https://towardsdatascience.com/road-segmentation-727fb41c51af
 \pagebreak
