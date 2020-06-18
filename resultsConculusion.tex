@@ -7,19 +7,27 @@ The model predicted most of the roads, which were predicted by the model without
 
 \begin{figure}[h!]
   \centering
-  \begin{subfigure}{0.55\textwidth}
-    \includegraphics[width=\textwidth]{run_merge_roads}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=\textwidth]{run_roads}
     \caption{}
   \end{subfigure}~
-  \begin{subfigure}{0.21\textwidth}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
+    \includegraphics[width=0.96\textwidth]{run_merge_roads}
+    \caption{}
+  \end{subfigure}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
     \includegraphics[width=\textwidth]{run_road_linknet}
     \caption{}
   \end{subfigure}~
-  \begin{subfigure}{0.21\textwidth}
+  \begin{subfigure}{0.5\textwidth}
+    \centering
     \includegraphics[width=\textwidth]{sat_image_run}
     \caption{}
   \end{subfigure}
-  \caption[Predictions]{\textbf{(a)} Predictions using our model. \textbf{(b)} Predictions just using the road-detection model. \textbf{(c)} Image used to find predictions. Comparing the original road-detection model with the improved model.}
+  \caption[Predictions]{\textbf{(a)} Predictions using our model. \textbf{(b)} Merging the predictions \textbf{(c)} Predictions just using the road-detection model. \textbf{(d)} Image used to find predictions. Comparing the original road-detection model with the improved model.}
   \label{fig:run_merge_road_maps}
 \end{figure}
 
@@ -68,7 +76,7 @@ Now that we have two predictions, one with super-resolution and without it, we m
     \includegraphics[width=\textwidth]{cons_road_coverleaf_sr}
     \caption{}
   \end{subfigure}
-  \caption[Disastors in applying the model on unexpected images]{\textbf{(a)} The image to apply the model on. \textbf{(b)} Road detection without applying super-resolution. \textbf{(c)} Road detection by out model. Notice how the accuracy drops when we apply the model on an aerial image.}
+  \caption[Disastors in applying the model on unexpected images]{\textbf{(a)} The image to apply the model on. \textbf{(b)} Road detection without applying super-resolution. \textbf{(c)} Road detection by our model. Notice how the accuracy drops when we apply the model on an aerial image.}
   \label{fig:cons_coverleaf}
 \end{figure}
 
@@ -84,7 +92,7 @@ Now that we have two predictions, one with super-resolution and without it, we m
 
 Thanks to \href{https://arxiv.org/pdf/1805.06561.pdf}{DeepGlobe 2018: A Challenge to Parse the Earth through Satellite Images} and \href{http://openaccess.thecvf.com/content_cvpr_2018_workshops/papers/w4/Zhou_D-LinkNet_LinkNet_With_CVPR_2018_paper.pdf}{Submissions for the DeepGlobe Road Extraction Challenge}, I could test the hypothesis that indeed super-resolution can improve the results drastically.
 
-In this process, we see that the narrow roads that were not recognized by the road-detection model are now visible in the predictions at the cost of the spacial connectivity of broad roads. Another significant observation is that the model is applied on broad roads. This is because the noise generated during super-resolution becomes much more dominant in monotonic features.
+In this process, we see that the narrow roads that were not recognized by the road-detection model are now visible in the predictions at the cost of the spatial connectivity of broad roads. Another significant observation is that the model is applied on broad roads. This is because the noise generated during super-resolution becomes much more dominant in monotonic features.
 
 We see that super-resolution and road-detection both use Deep Convolution Neural Network. We train both the models separately and use them one after the other, to find significantly better results than any existing models. Now that the hypothesis that merging SR improves road-detection results is proven to be correct, the next step is making a single model that will detect roads instead of relying on two different models. This is logically feasible because both the models are DCNN, and another DCNN should replicate the behavior in a single model.
 
