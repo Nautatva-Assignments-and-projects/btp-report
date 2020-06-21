@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{df} \PYG{o}{=} \PYG{n}{image}\PYG{o}{.}\PYG{n}{split}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}source\PYGZsq{}}\PYG{p}{,} \PYG{n}{path}\PYG{p}{(}\PYG{n}{root\PYGZus{}path}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}sliced\PYGZsq{}}\PYG{p}{))}  \PYG{c+c1}{\PYGZsh{} df contains all the details of the smaller images. These small images are stored in the `sliced` directory}
+\end{Verbatim}

@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n}{merge}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}input\PYGZus{}folder\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}output\PYGZus{}folder\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}extension\PYGZus{}of\PYGZus{}files\PYGZus{}to\PYGZus{}be\PYGZus{}joined\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}scale\PYGZus{}SR\PYGZdq{}}\PYG{p}{)}
+\end{Verbatim}
