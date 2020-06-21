@@ -1,4 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{c+c1}{\PYGZsh{} Find roads}
-\PYG{n}{find\PYGZus{}roads}\PYG{p}{(}\PYG{n}{source}\PYG{o}{=}\PYG{n}{path}\PYG{p}{(}\PYG{n}{root\PYGZus{}path}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}sr\PYGZdq{}}\PYG{p}{),} \PYG{n}{output}\PYG{o}{=}\PYG{n}{path}\PYG{p}{(}\PYG{n}{root\PYGZus{}path}\PYG{p}{,} \PYG{l+s+s2}{\PYGZdq{}roads\PYGZdq{}}\PYG{p}{),} \PYG{n}{weights}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}path\PYGZus{}to\PYGZus{}weights\PYGZdq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Takes in the source folder sr, predicts roads in the image and writes the image in folder named roads.}
-\end{Verbatim}

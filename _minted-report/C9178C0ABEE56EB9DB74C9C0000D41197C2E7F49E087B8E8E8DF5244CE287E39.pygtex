@@ -1,7 +1,0 @@
-\begin{Verbatim}[commandchars=\\\{\}]
-\PYG{k+kn}{import} \PYG{n+nn}{helper}
-
-\PYG{n}{image\PYGZus{}array} \PYG{o}{=} \PYG{n}{read\PYGZus{}image}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}path\PYGZus{}to\PYGZus{}image\PYGZsq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Reads image and stores the matrix in image variable; Lets say 16Bit image}
-\PYG{n}{write\PYGZus{}image}\PYG{p}{(}\PYG{n}{image\PYGZus{}array}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}output.png\PYGZsq{}}\PYG{p}{)}  \PYG{c+c1}{\PYGZsh{} Writes the image array to a file named output.png}
-\PYG{n}{convertTo8Bit}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}path\PYGZus{}to\PYGZus{}image\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}output\PYGZus{}8bit.png\PYGZsq{}}\PYG{p}{)}
-\end{Verbatim}
